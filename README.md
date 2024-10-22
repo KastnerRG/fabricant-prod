@@ -7,23 +7,9 @@ fabricant.ucsd.edu configuration
 3. Install Python3.12
 4. Clone this repo
 ```
-git clone git@github.com:UCSD-E4E/kastner-ml.git /home/e4eadmin/
+git clone git@github.com:KastnerRG/fabricant.git /home/fabricant-admin/fabricant
 ```
-5. Create a venv at `/home/e4eadmin/kastner-ml/.venv`
-```
-python3.12 -m venv /home/e4eadmin/kastner-ml/.venv`
-```
-6. Activate venv
-```
-source /home/e4eadmin/kastner-ml/.venv/
-```
-7. Install dependencies
-```
-python -m pip install --upgrade pip poetry
-cd /home/e4eadmin/kastner-ml/.venv/
-poetry install
-```
-9. Install Bitwarden Client
+5. Install Bitwarden Client
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash # install nvm
 source ~/.bashrc # activate nvm
@@ -33,11 +19,25 @@ npm install -g @bitwarden/cli # installs bw
 bw config server https://vault.e4e-gateway.ucsd.edu # configures bw to our vault
 bw login # Logs in
 ```
-10. Bootstrap creds
+6. Bootstrap creds
 ```
-bw unlock --raw > .bw_session
+bw unlock --raw > ~/fabricant/.bw_session
 ```
-8. Install
+7. Create a venv at `~/fabricant/.venv`
+```
+python3.12 -m venv ~/fabricant/.venv`
+```
+8. Activate venv
+```
+source ~/fabricant/.venv/bin/activate
+```
+9. Install dependencies
+```
+python -m pip install --upgrade pip poetry
+cd ~/fabricant/
+poetry install
+```
+10. Install
 ```
 ansible-playbook playbook.yml
 ```
