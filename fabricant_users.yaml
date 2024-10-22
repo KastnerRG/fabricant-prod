@@ -22,3 +22,9 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2dPvrqvFJQyPX1L1j7QFYCMFIFdYmJHolgtMhMdlx2 oweng@ucsd.edu
     expires: "2025-06-30 23:59:59"
     password: $6$rounds=656000$gIFhOQHZZLDrwQR.$5rFmouHYECQttLwtGx82jsx4Jls3cNWKtUfD4erNXInpfkUdaZ8ieZK4eif.rWDtNqKWaN6gMZOibM606csfn/
+  - username: d.richmond.520
+    name: Dustin Richmond
+    authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDkpVxAs0YRjXVvxXpIMIV1pVOzOpyVomyvPTLMIHFjjjhYt4coy/IjDqU5z27hH04zbEufkAEbkqvcS+NqQIJlj2mEuT58xcSLXksYLRttcEMW+QdrhcGPv+phOijbjaSPEHk6of4cDGwDQLv/UxwDS/e1rpwjJ2ylYRZbJ581IKmkBuuhqRlgUycIEAIMHyAeWIt12MpHMrmSBj4mUZjvc8sfvfiP3NmgKR2gapHwg2H7kGIvLWSjh7IZUWehMCADQpTaPC/M89X9vVUtocH1kMpMo/mFMTdkXLWt9Y74Uaf0hqP0MdC/AABXGX9CocCmSpHDxcUcjAyXsFRawlwu0D8mql12ijz6Q41oZjx3tPg0eqn8n9xnpCkKRP+w4QG7Cf4kdpleudZmSP7JJV0V4XRwl+E03NQayaDBUsk91oCZesY2ghInVrfJRgdA9AAUMlazAZuMYYmGsebsW3oNyurrRD2Bgy++1fPe9FQMmY4e5ik8AjCMxbMamsTqMwY37F5UWym/UTNcxKqvlldvjhU4wo4AqlZsSK0LW87C6AYc2z/ib0tm5sr3yEZ6/qWsWfQHsQiMg0LxTBXT1rylDcBdCqaGyF+xfeZgeyjasE30DtyK2tQ5bXfalrivKbhr+Qp+dZW9w2onM8ItqW2Bg/PKg7kJOs8HNiCvvMOgw== drichmond@ucsc.edu
+    expires: "2025-06-30 23:59:59"
+    password: $6$rounds=656000$RjhTWCvs4qTA5PpO$hNDytIgfFelqMYK3IW/SU3VgVscM4kSqlAVYaJHHB3/cD4uNs5vKeteWqn3Ui33QYmowWJ4x4pZ4DyVM6GuK9/
