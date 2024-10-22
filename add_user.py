@@ -13,7 +13,6 @@ HOSTNAME = 'fabricant'
 
 ACCEPTED_GROUPS = {
     1: 'docker',
-    2: 'cuda',
 }
 
 def main():
