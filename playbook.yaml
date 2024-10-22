@@ -74,6 +74,9 @@
         - libcupsfilters2t64
   - import_tasks: unattended-upgrades.yml
 
+# Setup Docker
+  - import_tasks: docker_ubuntu_24.yaml
+
 # Monitoring
   - import_tasks: monitoring.yaml
 
