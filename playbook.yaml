@@ -107,3 +107,11 @@
   - name: enable login linger
     ansible.builtin.command:
       cmd: loginctl enable-linger {{ ansible_user_id }}
+
+  handlers:
+  # Restart Docker if necessary.  This happens after ALL tasks are executed, including the docker-compose task.
+  - name: Restart Docker
+    become: true
+    service:
+      name: docker
+      state: restarted
