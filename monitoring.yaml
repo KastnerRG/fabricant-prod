@@ -10,6 +10,7 @@
     checksum: sha256:89443fad0d1388b0c1753cbbc177c2c903790e19e9f2854c5235356b518019da
     dest: '{{ansible_env.HOME}}/installers/prometheus/ipmi_exporter-1.9.0.linux-amd64.tar.gz'
     decompress: false
+    timeout: 30
 - name: Extract ipmi_exporter
   ansible.builtin.unarchive:
     src: '{{ansible_env.HOME}}/installers/prometheus/ipmi_exporter-1.9.0.linux-amd64.tar.gz'
