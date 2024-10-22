@@ -5,3 +5,14 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIR1cXklusoEBrgQP4miHRvUp64rkrTUX2OrAJrE5f6H nthui@eng.ucsd.edu
     expires: "2025-06-30 23:59:59"
     password: $6$rounds=656000$QQ9Dd6WpGC/63z1Z$8RCj3aJ1Lz/MYbjWEyCft9oBXr5mmnpuTc6hEmaAxRzq1FrHv.dlRme.5NVSSPrgDgL/3Hee.xHn3vkZTTJnv.
+  - username: d.zuberi.160
+    name: Danial Zuberi
+    authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6geLo8pS0dU9jOKdNkLY6pBrTGlaP+DvIdicxAVxZj dzuberi@kilogram
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBM09OFCP+hcvu6S/Ikl7LRj7qPsGjfreclJFRFF0lhu dzuberi@DESKTOP-BIFLG0S
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJpX5YWVEwpcmfQpPWpXks3AB27wYOTLuazguSzdJK7 dzuberi522@gmail
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8HSEwws1dhjpdIB/HgvBpHJYVotGwb0CzMqbIHhCMi dzube@DESKTOP-BIFLG0S
+    expires: "2025-06-30 23:59:59"
+    groups:
+      - docker
+    password: $6$rounds=656000$kNRNUzHcSXiWwX.d$cQ52OxxE30vj2mPo3jdnYPG7ROoYydsivKV2y9in3GGXGXDrek24bZMYQGSK0PT/7OioQDGg9vWYFdckvWj3y/
