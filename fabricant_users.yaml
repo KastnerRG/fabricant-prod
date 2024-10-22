@@ -16,3 +16,9 @@ users:
     groups:
       - docker
     password: $6$rounds=656000$kNRNUzHcSXiWwX.d$cQ52OxxE30vj2mPo3jdnYPG7ROoYydsivKV2y9in3GGXGXDrek24bZMYQGSK0PT/7OioQDGg9vWYFdckvWj3y/
+  - username: o.weng.631
+    name: Olivia Weng
+    authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2dPvrqvFJQyPX1L1j7QFYCMFIFdYmJHolgtMhMdlx2 oweng@ucsd.edu
+    expires: "2025-06-30 23:59:59"
+    password: $6$rounds=656000$gIFhOQHZZLDrwQR.$5rFmouHYECQttLwtGx82jsx4Jls3cNWKtUfD4erNXInpfkUdaZ8ieZK4eif.rWDtNqKWaN6gMZOibM606csfn/
