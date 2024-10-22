@@ -136,8 +136,9 @@ class Service:
                     playbook_run = subprocess.check_call(
                         playbook_cmd, env=new_env, cwd=self.PROJECT_ROOT)
                     self.set_retval('ansible-playbook', playbook_run)
-                    docker_client = docker.from_env()
-                    docker_client.images.prune()
+
+                    # docker_client = docker.from_env()
+                    # docker_client.images.prune()
 
                     poetry_install = subprocess.check_call(
                         ['.venv/bin/poetry', 'install'], env=new_env)
