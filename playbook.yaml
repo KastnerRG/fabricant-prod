@@ -88,6 +88,8 @@
     vars:
       installer: '{{ansible_env.HOME}}/installers/qualys_trellix/oec-qualystrellixinstallers-linux.tgz'
 
+# Create users:
+  - import_tasks: create_users.yaml
 
 # Auto deploy
   - name: Ensure systemd user dir exists
