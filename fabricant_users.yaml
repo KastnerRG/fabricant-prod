@@ -34,3 +34,9 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHVqMFy25taTInX70+T50XO7X6tHLgGMn3tvs6CDfc3 drewes@cs.stanford.edu
     expires: "2025-06-30 23:59:59"
     password: $6$rounds=656000$zWVKrp2suJXdBnu4$duB92XyWnf0CCP.hQFirCmFVfBBX03xbG0FrDwjMoILKNFV9BU1a0aN.dW0Wwn905C29CNBHPurc6M1HQ/WLO/
+  - username: a.meza.278
+    name: Andy Meza
+    authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL7Mhf8PjoZtqFY/AnJ+aVfenrOu2B1XVdtPANHJ26L7 anmeza@ucsd.edu
+    expires: "2025-06-30 23:59:59"
+    password: $6$rounds=656000$bF90U3xSRcsiMV4u$CBCIHcqN8s/UCprTbMP2XC1nBkBVb7duL9AsXKaRnJyOQOApbcId8IeZOfsK8Rj9HfMIVxU4v.EFu/xeKTTGg/
