@@ -1,0 +1,68 @@
+- name: Ensure promtheus installer dir exists
+  ansible.builtin.file:
+    path: '{{ansible_env.HOME}}/installers/prometheus/'
+    state: directory
+
+- name: Download ipmi exporter
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/prometheus-community/ipmi_exporter/releases/download/v1.9.0/ipmi_exporter-1.9.0.linux-amd64.tar.gz
+    checksum: sha256:89443fad0d1388b0c1753cbbc177c2c903790e19e9f2854c5235356b518019da
+    dest: '{{ansible_env.HOME}}/installers/prometheus/ipmi_exporter-1.9.0.linux-amd64.tar.gz'
+    decompress: false
+- name: Extract ipmi_exporter
+  ansible.builtin.unarchive:
+    src: '{{ansible_env.HOME}}/installers/prometheus/ipmi_exporter-1.9.0.linux-amd64.tar.gz'
+    dest: /tmp
+    creates: /tmp/ipmi_exporter-1.9.0.linux-amd64/ipmi_exporter
+- name: Install ipmi_exporter
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/ipmi_exporter-1.9.0.linux-amd64/ipmi_exporter
+    dest: /usr/local/bin/ipmi_exporter
+    mode: 755
+- name: Deploy ipmi_exporter service
+  become: true
+  ansible.builtin.copy:
+    src: ipmi_exporter.service
+    dest: /etc/systemd/system/ipmi_exporter.service
+- name: Enable ipmi_exporter service
+  become: true
+  ansible.builtin.systemd_service:
+    enabled: true
+    name: ipmi_exporter.service
+    state: started
+
+- name: Ensure promtheus installer dir exists
+  ansible.builtin.file:
+    path: '{{ansible_env.HOME}}/installers/prometheus/'
+    state: directory
+- name: Install node exporter
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+    checksum: sha256:6809dd0b3ec45fd6e992c19071d6b5253aed3ead7bf0686885a51d85c6643c66
+    dest: '{{ansible_env.HOME}}/installers/prometheus/node_exporter-1.8.2.linux-amd64.tar.gz'
+    decompress: false
+- name: Extract node_exporter
+  ansible.builtin.unarchive:
+    src: '{{ansible_env.HOME}}/installers/prometheus/node_exporter-1.8.2.linux-amd64.tar.gz'
+    dest: /tmp
+    creates: /tmp/node_exporter-1.8.2.linux-amd64/node_exporter
+- name: Install node_exporter
+  become: true
+  ansible.builtin.copy:
+    src: /tmp/node_exporter-1.8.2.linux-amd64/node_exporter
+    dest: /usr/local/bin/node_exporter
+    mode: 755
+- name: Deploy node exporter service
+  become: true
+  ansible.builtin.copy:
+    src: node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+- name: Enable node exporter service
+  become: true
+  ansible.builtin.systemd_service:
+    enabled: true
+    name: node_exporter.service
+    state: started

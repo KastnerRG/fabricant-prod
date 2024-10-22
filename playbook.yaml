@@ -1,0 +1,104 @@
+- name: Fabricant
+  hosts: localhost
+  tasks:
+# Set up bw
+  - name: Install nvm
+    ansible.builtin.shell: >
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    args:
+      creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+  - name: Install npm
+    ansible.builtin.shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install v22.9.0"
+    args:
+      executable: /bin/bash
+      creates: "{{ ansible_env.HOME }}/.nvm/versions/node/v22.9.0/bin/npm"
+  - name: Install BitWarden CLI
+    ansible.builtin.command:
+      cmd: >
+        bash -c "source $HOME/.nvm/nvm.sh && nvm exec v22.9.0 && npm install -g @bitwarden/cli"
+      creates: "{{ ansible_env.HOME }}/.nvm/versions/node/v22.9.0/bin/bw"
+  - name: Bootstrap BW Creds
+    ansible.builtin.shell:
+      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v22.9.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v22.9.0/lib/node_modules/@bitwarden/cli/build/bw.js unlock --raw > .bw_session'
+      chdir: '{{ansible_env.HOME}}/fabricant'
+      creates: '{{ansible_env.HOME}}/fabricant/.bw_session'
+  - name: Sync BW Client
+    ansible.builtin.shell:
+      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v22.9.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v22.9.0/lib/node_modules/@bitwarden/cli/build/bw.js sync --session `cat .bw_session`'
+      chdir: '{{ansible_env.HOME}}/fabricant'
+
+# Set timezone
+  - name: Set timezone to America/Los_Angeles
+    become: true
+    community.general.timezone:
+      name: America/Los_Angeles
+
+# Set netplan
+  - name: Install netplan config
+    become: true
+    ansible.builtin.copy:
+      src: netplan/01-fabricant.yml
+      dest: /etc/netplan/01-fabricant.yaml
+      owner: root
+      group: root
+      mode: '0600'
+  - name: Netplan Apply
+    become: true
+    ansible.builtin.command:
+      cmd: netplan apply
+
+# Packages
+  - name: Ensure that system is up to date
+    become: true
+    apt:
+      name: "*"
+      state: latest
+      autoremove: yes
+      update_cache: yes
+  - name: Install/update system packages
+    become: true
+    ansible.builtin.apt:
+      pkg:
+        - python3
+        - build-essential
+  - name: Ensure these packages are not installed
+    become: true
+    ansible.builtin.apt:
+      state: absent
+      pkg:
+        - cups-browsed
+        - cups-filters
+        - cups-filters-core-drivers
+        - libcupsfilters2t64
+  - import_tasks: unattended-upgrades.yml
+
+# Monitoring
+  - import_tasks: monitoring.yaml
+
+# UFW
+  - import_tasks: ufw.yml
+
+# Qualys/Trellix
+  - import_tasks: oec_qualys_trellix.yaml
+    vars:
+      installer: '{{ansible_env.HOME}}/installers/qualys_trellix/oec-qualystrellixinstallers-linux.tgz'
+
+
+# Auto deploy
+  - name: Ensure systemd user dir exists
+    ansible.builtin.file:
+      path: .config/systemd/user/
+      state: directory
+  - name: Deploy self updater
+    ansible.builtin.template:
+      src: ansible_deploy_service.service
+      dest: .config/systemd/user/ansible_deploy_service.service
+  - name: Enable ansible_deploy_service
+    ansible.builtin.systemd_service:
+      enabled: true
+      name: ansible_deploy_service
+      state: started
+      scope: user
+  - name: enable login linger
+    ansible.builtin.command:
+      cmd: loginctl enable-linger {{ ansible_user_id }}
