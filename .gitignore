@@ -253,3 +253,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/python,linux,windows,macos,ansible
 .bw_session
 ansible.log
+grafana-storage/
+prometheus-data/
