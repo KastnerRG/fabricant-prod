@@ -110,6 +110,11 @@
     ansible.builtin.command:
       cmd: loginctl enable-linger {{ ansible_user_id }}
 
+  - name: Docker compose
+    community.docker.docker_compose_v2:
+      project_src: '{{ansible_env.HOME}}/waiter/'
+      pull: 'always'
+
   handlers:
   # Restart Docker if necessary.  This happens after ALL tasks are executed, including the docker-compose task.
   - name: Restart Docker
