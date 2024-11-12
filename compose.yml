@@ -21,6 +21,8 @@ services:
     volumes:
       - ./grafana-storage:/var/lib/grafana:rw
       - ./grafana:/etc/grafana:ro
+    ports:
+      - 8080:3000
 secrets:
   grafana_e4eadmin_password:
     file: .secrets/gf_admin_password.txt
