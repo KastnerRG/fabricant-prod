@@ -256,3 +256,4 @@ ansible.log
 grafana-storage/
 prometheus-data/
 .secrets
+alertmanager/alertmanager.yml
