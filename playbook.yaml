@@ -114,6 +114,11 @@
     ansible.builtin.file:
       path: '{{ansible_env.HOME}}/fabricant/.secrets/'
       state: directory
+  - name: Ensure prometheus data dir exists
+    ansible.builtin.file:
+      path: '{{ansible_env.HOME}}/fabricant/prometheus-data/'
+      state: directory
+      mode: '0777'
   - name: Deploy gf_admin_password
     ansible.builtin.shell:
       cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v22.9.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v22.9.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "dashboard.waiter.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant/.secrets/gf_admin_password.txt'
