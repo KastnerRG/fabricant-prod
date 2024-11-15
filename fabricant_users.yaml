@@ -12,9 +12,11 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBM09OFCP+hcvu6S/Ikl7LRj7qPsGjfreclJFRFF0lhu dzuberi@DESKTOP-BIFLG0S
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJpX5YWVEwpcmfQpPWpXks3AB27wYOTLuazguSzdJK7 dzuberi522@gmail
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8HSEwws1dhjpdIB/HgvBpHJYVotGwb0CzMqbIHhCMi dzube@DESKTOP-BIFLG0S
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+bBt46zXmHIbLwGC7WfoGHZQ9xIlSix5NKamgTUhhM dzuberi@Danials-MacBook-Pro.local
     expires: "2025-06-30 23:59:59"
     groups:
       - docker
+      - rdp_users
     password: $6$rounds=656000$kNRNUzHcSXiWwX.d$cQ52OxxE30vj2mPo3jdnYPG7ROoYydsivKV2y9in3GGXGXDrek24bZMYQGSK0PT/7OioQDGg9vWYFdckvWj3y/
   - username: o.weng.631
     name: Olivia Weng
