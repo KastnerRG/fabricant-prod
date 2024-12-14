@@ -18,7 +18,6 @@ users:
     expires: "2025-06-30 23:59:59"
     groups:
       - docker
-      - rdp_users
     password: $6$rounds=656000$kNRNUzHcSXiWwX.d$cQ52OxxE30vj2mPo3jdnYPG7ROoYydsivKV2y9in3GGXGXDrek24bZMYQGSK0PT/7OioQDGg9vWYFdckvWj3y/
   - username: o.weng.631
     name: Olivia Weng
