@@ -5,6 +5,8 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIR1cXklusoEBrgQP4miHRvUp64rkrTUX2OrAJrE5f6H nthui@eng.ucsd.edu
     expires: "2025-06-30 23:59:59"
     password: $6$rounds=656000$QQ9Dd6WpGC/63z1Z$8RCj3aJ1Lz/MYbjWEyCft9oBXr5mmnpuTc6hEmaAxRzq1FrHv.dlRme.5NVSSPrgDgL/3Hee.xHn3vkZTTJnv.
+    groups:
+      - docker
   - username: d.zuberi.160
     name: Danial Zuberi
     authorized_keys:
