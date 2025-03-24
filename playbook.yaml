@@ -133,6 +133,8 @@
     community.docker.docker_compose_v2:
       project_src: '{{ansible_env.HOME}}/fabricant/'
       pull: 'always'
+      remove_orphans: true
+      remove_volumes: true
 
   handlers:
   # Restart Docker if necessary.  This happens after ALL tasks are executed, including the docker-compose task.
