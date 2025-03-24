@@ -56,3 +56,6 @@ secrets:
     file: .secrets/gf_admin_password.txt
   minio_admin_password:
     file: .secrets/minio_admin_password.txt
+volumes:
+  e4e_nas_minio:
+    external: true
