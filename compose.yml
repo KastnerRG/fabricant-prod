@@ -20,6 +20,39 @@ services:
       - ./alertmanager:/etc/alertmanager:ro
     ports:
       - 9093:9093
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:2.9.1
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - CADDY_INGRESS_NETWORKS=fabricant_default
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./caddy-data:/data
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    restart: always
+    volumes:
+      - /share/minio:/data
+    ports: # TODO remove me
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: e4e_minio_admin
+      MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_admin_password
+    command: server /data --console-address ":9001"
+    secrets:
+      - minio_admin_password
+    labels:
+      caddy_0: s3.fabricant.ucsd.edu
+      caddy_0.reverse_proxy: "{{upstreams 9000}}"
+      caddy_1: mc.fabricant.ucsd.edu
+      caddy_1.reverse_proxy: "{{upstreams 9001}}"
 secrets:
   grafana_e4eadmin_password:
     file: .secrets/gf_admin_password.txt
+  minio_admin_password:
+    file: .secrets/minio_admin_password.txt
