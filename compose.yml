@@ -37,14 +37,12 @@ services:
     container_name: minio
     restart: always
     volumes:
-      - e4e_nas_minio:/data
-      - /share/minio:/data/.minio.sys
+      - e4e_nas_minio:/nas
+      - /share/minio:/data
     environment:
       MINIO_ROOT_USER: e4e_minio_admin
       MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_admin_password
     command: server /data --console-address ":9001"
-    ports:
-      - 9001:9001
     secrets:
       - minio_admin_password
     labels:
