@@ -36,6 +36,9 @@ services:
     image: quay.io/minio/minio
     container_name: minio
     restart: always
+    # Minio does not support cross-mounts.
+    # Buckets and metadata must be on the same mount.
+    # Failure to do so prevents minio from starting. :(
     volumes:
       - e4e_nas_minio:/data
     environment:
