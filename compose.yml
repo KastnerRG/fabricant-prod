@@ -28,7 +28,9 @@ services:
       - 80:80
       - 443:443
     environment:
-      - CADDY_INGRESS_NETWORKS=fabricant_default
+      - CADDY_INGRESS_NETWORKS=caddy_proxy
+    networks:
+      - caddy_proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./caddy-data:/data
@@ -57,7 +59,10 @@ secrets:
     file: .secrets/gf_admin_password.txt
   # minio_admin_password:
   #   file: .secrets/minio_admin_password.txt
-volumes:
+# volumes:
   # e4e_nas_minio:
   #   external: true
   #   name: e4e_nas_minio
+networks:
+  caddy_proxy:
+    driver: bridge
