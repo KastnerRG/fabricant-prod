@@ -57,7 +57,10 @@ secrets:
     file: .secrets/gf_admin_password.txt
   # minio_admin_password:
   #   file: .secrets/minio_admin_password.txt
-volumes:
+# volumes:
   # e4e_nas_minio:
   #   external: true
   #   name: e4e_nas_minio
+networks:
+  caddy_proxy:
+    external: true
