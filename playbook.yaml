@@ -78,6 +78,7 @@
         - libxmlsec1-dev
         - libffi-dev
         - liblzma-dev
+        - sshfs
   - name: Ensure these packages are not installed
     become: true
     ansible.builtin.apt:
