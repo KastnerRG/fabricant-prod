@@ -1,0 +1,24 @@
+- name: Create services group
+  become: true
+  ansible.builtin.group:
+    name: services
+    state: present
+- name: Create fs_services user
+  become: true
+  ansible.builtin.user:
+    name: fs_services
+    create_home: yes
+    shell: /bin/bash
+    groups:
+      - docker
+      - cuda
+      - services
+- name: Create sf_services user
+  become: true
+  ansible.builtin.user:
+    name: sf_services
+    create_home: yes
+    shell: /bin/bash
+    groups:
+      - docker
+      - services
