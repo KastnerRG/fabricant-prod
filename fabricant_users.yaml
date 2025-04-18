@@ -8,6 +8,9 @@ users:
     password: $6$rounds=656000$QQ9Dd6WpGC/63z1Z$8RCj3aJ1Lz/MYbjWEyCft9oBXr5mmnpuTc6hEmaAxRzq1FrHv.dlRme.5NVSSPrgDgL/3Hee.xHn3vkZTTJnv.
     groups:
       - docker
+    sudo_allow:
+      - /usr/bin/su fs_services
+      - /usr/bin/su sf_services
   - username: d.zuberi.160
     name: Danial Zuberi
     authorized_keys:
@@ -56,3 +59,5 @@ users:
       - /usr/bin/mount -t cifs *
       - /usr/bin/mount -v -t cifs *
       - /usr/bin/umount *
+      - /usr/bin/su fs_services
+      - /usr/bin/su sf_services

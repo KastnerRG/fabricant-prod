@@ -104,6 +104,17 @@
     vars:
       installer: '{{ansible_env.HOME}}/installers/qualys_trellix/oec-qualystrellixinstallers-linux.tgz'
 
+# Web Services
+  - import_tasks: web_services.yaml
+  - name: Deny SSH login
+    become: true
+    ansible.builtin.lineinfile:
+      line: DenyGroups services
+      path: /etc/ssh/sshd_config
+      regexp: "^(#)?DenyGroups"
+      state: present
+    notify:
+      - restart sshd
 # Create users:
   - import_tasks: create_users.yaml
 
@@ -164,3 +175,8 @@
     service:
       name: docker
       state: restarted
+  - name: restart sshd
+    become: true
+    service:
+      name: sshd
+      state: reload
