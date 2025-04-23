@@ -179,4 +179,4 @@
     become: true
     service:
       name: sshd
-      state: reload
+      state: reloaded
