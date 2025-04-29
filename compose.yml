@@ -58,7 +58,7 @@ services:
     image: ghcr.io/ucsd-e4e/label-studio:20250118.193659-release-1-15-0-caf6134
     restart: unless-stopped
     networks:
-      - fabricant_default
+      - default
       - caddy_proxy
     volumes:
       - ./label_studio_data_pg:/label-studio/data
