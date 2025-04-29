@@ -51,7 +51,7 @@ services:
       - postgres_admin_password
     command: --config_file=/etc/postgresql/postgres.conf
     ports:
-      - 5432:5432
+      - 5433:5432
     user: "${USER_ID}:${GROUP_ID}"
 
   label_studio_pg:
