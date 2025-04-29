@@ -37,6 +37,7 @@ services:
   
   postgres:
     image: postgres:16.4
+    container_name: postgres
     restart: always
     shm_size: 128 mb
     environment:
@@ -57,6 +58,8 @@ services:
     container_name: label-studio
     image: ghcr.io/ucsd-e4e/label-studio:20250118.193659-release-1-15-0-caf6134
     restart: unless-stopped
+    depends_on:
+      - postgres
     links:
       - postgres
     networks:
