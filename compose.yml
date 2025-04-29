@@ -52,6 +52,8 @@ services:
     command: --config_file=/etc/postgresql/postgres.conf
     ports:
       - 5433:5432
+    networks:
+      - label_studio
     user: "${USER_ID}:${GROUP_ID}"
 
   label_studio_pg:
@@ -60,9 +62,8 @@ services:
     restart: unless-stopped
     depends_on:
       - postgres
-    links:
-      - postgres
     networks:
+      - label_studio
       - caddy_proxy
     volumes:
       - ./label_studio_data_pg:/label-studio/data
@@ -116,6 +117,7 @@ secrets:
   #   external: true
   #   name: e4e_nas_minio
 networks:
+  label_studio:
   caddy_proxy:
     external: true
 
