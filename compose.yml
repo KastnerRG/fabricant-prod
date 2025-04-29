@@ -35,9 +35,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./caddy-data:/data
   
-  postgres:
+  postgres_label_studio:
     image: postgres:16.4
-    container_name: postgres
+    container_name: postgres_label_studio
     restart: always
     shm_size: 128 mb
     environment:
@@ -61,7 +61,7 @@ services:
     image: ghcr.io/ucsd-e4e/label-studio:20250118.193659-release-1-15-0-caf6134
     restart: unless-stopped
     depends_on:
-      - postgres
+      - postgres_label_studio
     networks:
       - label_studio
       - caddy_proxy
@@ -78,7 +78,7 @@ services:
       - POSTGRE_NAME=label_studio
       - POSTGRE_USER=label_studio_pg
       - POSTGRE_PORT=5432
-      - POSTGRE_HOST=postgres
+      - POSTGRE_HOST=postgres_label_studio
     labels:
       caddy: labeler.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 8080}}"
