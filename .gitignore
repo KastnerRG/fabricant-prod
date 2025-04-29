@@ -257,3 +257,4 @@ grafana-storage/
 prometheus-data/
 .secrets
 alertmanager/alertmanager.yml
+postgres/data
