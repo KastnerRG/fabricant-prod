@@ -97,6 +97,8 @@ services:
     command: server /data --console-address ":9001"
     secrets:
       - minio_admin_password
+    networks:
+      - caddy_proxy
     labels:
       caddy_0: s3.fabricant.ucsd.edu
       caddy_0.reverse_proxy: "{{upstreams 9000}}"
