@@ -30,7 +30,7 @@ services:
     environment:
       - CADDY_INGRESS_NETWORKS=caddy_proxy
     networks:
-      cady-proxy:
+      caddy_proxy:
         aliases:
           - s3.fabricant.ucsd.edu
           - mc.fabricant.ucsd.edu
