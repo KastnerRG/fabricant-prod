@@ -82,8 +82,6 @@ services:
     labels:
       caddy: labeler.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 8080}}"
-    extra_hosts:
-      - s3.fabricant.ucsd.edu:minio
     env_file:
       - .secrets/label_studio_admin_password_pg.env
 
@@ -100,7 +98,11 @@ services:
     secrets:
       - minio_admin_password
     networks:
-      - caddy_proxy
+      label_studio:
+        aliases:
+          - s3.fabricant.ucsd.edu
+          - mc.fabricant.ucsd.edu
+      caddy_proxy:
     labels:
       caddy_0: s3.fabricant.ucsd.edu
       caddy_0.reverse_proxy: "{{upstreams 9000}}"
