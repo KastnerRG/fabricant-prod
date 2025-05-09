@@ -30,7 +30,10 @@ services:
     environment:
       - CADDY_INGRESS_NETWORKS=caddy_proxy
     networks:
-      - caddy_proxy
+      cady-proxy:
+        aliases:
+          - s3.fabricant.ucsd.edu
+          - mc.fabricant.ucsd.edu
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./caddy-data:/data
@@ -98,11 +101,7 @@ services:
     secrets:
       - minio_admin_password
     networks:
-      label_studio:
-        aliases:
-          - s3.fabricant.ucsd.edu
-          - mc.fabricant.ucsd.edu
-      caddy_proxy:
+      - caddy_proxy
     labels:
       caddy_0: s3.fabricant.ucsd.edu
       caddy_0.reverse_proxy: "{{upstreams 9000}}"
