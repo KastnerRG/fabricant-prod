@@ -35,6 +35,7 @@ services:
           - s3.fabricant.ucsd.edu
           - mc.fabricant.ucsd.edu
           - labeler.e4e.ucsd.edu
+          - data.smartfin.e4e.ucsd.edu
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./caddy-data:/data
