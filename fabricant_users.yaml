@@ -51,7 +51,7 @@ users:
     name: Chris Crutchfield
     authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF2Z7LbaDPTNkdnuvFivXTUx8X9gU0ZyWrrYBH7KSmG3 chris@chris-laptop
-    expires: "2025-06-30 23:59:59"
+    expires: "2025-12-30=1 23:59:59"
     groups:
       - docker
     password: $6$w2DjXVZz4/c3NRAC$bIdyTZwZ.Zm26Fh3TSHITus2OhHRweHxGBYrfWe/jGDKIV4WwGbEoycKZKiHVZ53mqUwQRLoTyKK7vWkrpmw70
