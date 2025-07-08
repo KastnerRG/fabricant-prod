@@ -1,7 +1,7 @@
 - name: Deploy label_studio password
   ansible.builtin.script:
     cmd: scripts/deploy_label_studio_pass.sh
-    creates: "{{ansible_env.HOME}}/fabricant/.secrets/label_studio_admin_password_pg.env"
+    creates: "{{ansible_env.HOME}}/fabricant-prod/.secrets/label_studio_admin_password_pg.env"
     executable: /bin/bash
     chdir: "{{ansible_env.HOME}}/fabricant"
 - name: Ensure label studio admin group exists
@@ -23,6 +23,6 @@
   ansible.builtin.file:
     group: fabricant-admin
     owner: fabricant-admin
-    path: "{{ansible_env.HOME}}/fabricant/label_studio_data_pg"
+    path: "{{ansible_env.HOME}}/fabricant-prod/label_studio_data_pg"
     state: directory
     mode: '0777'

@@ -22,12 +22,12 @@
   - name: Bootstrap BW Creds
     ansible.builtin.shell:
       cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js unlock --raw > .bw_session'
-      chdir: '{{ansible_env.HOME}}/fabricant'
-      creates: '{{ansible_env.HOME}}/fabricant/.bw_session'
+      chdir: '{{ansible_env.HOME}}/fabricant-prod'
+      creates: '{{ansible_env.HOME}}/fabricant-prod/.bw_session'
   - name: Sync BW Client
     ansible.builtin.shell:
       cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js sync --session `cat .bw_session`'
-      chdir: '{{ansible_env.HOME}}/fabricant'
+      chdir: '{{ansible_env.HOME}}/fabricant-prod'
 
 # Set timezone
   - name: Set timezone to America/Los_Angeles
@@ -139,18 +139,18 @@
 
   - name: Ensure secrets dir exists
     ansible.builtin.file:
-      path: '{{ansible_env.HOME}}/fabricant/.secrets/'
+      path: '{{ansible_env.HOME}}/fabricant-prod/.secrets/'
       state: directory
   - name: Ensure prometheus data dir exists
     ansible.builtin.file:
-      path: '{{ansible_env.HOME}}/fabricant/prometheus-data/'
+      path: '{{ansible_env.HOME}}/fabricant-prod/prometheus-data/'
       state: directory
       mode: '0777'
   - name: Deploy gf_admin_password
     ansible.builtin.shell:
-      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "dashboard.waiter.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant/.secrets/gf_admin_password.txt'
-      chdir: '{{ansible_env.HOME}}/fabricant'
-      creates: '{{ansible_env.HOME}}/fabricant/.secrets/gf_admin_password.txt'
+      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "dashboard.waiter.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant-prod/.secrets/gf_admin_password.txt'
+      chdir: '{{ansible_env.HOME}}/fabricant-prod'
+      creates: '{{ansible_env.HOME}}/fabricant-prod/.secrets/gf_admin_password.txt'
   - name: Setup Label Studio
     import_tasks: label_studio.yaml
   
@@ -159,9 +159,9 @@
     import_tasks: docker/docker_secrets.yml
   - name: Deploy minio_admin_password
     ansible.builtin.shell:
-      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "mc.fabricant.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant/.secrets/minio_admin_password.txt'
-      chdir: '{{ansible_env.HOME}}/fabricant'
-      creates: '{{ansible_env.HOME}}/fabricant/.secrets/minio_admin_password.txt'
+      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "mc.fabricant.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant-prod/.secrets/minio_admin_password.txt'
+      chdir: '{{ansible_env.HOME}}/fabricant-prod'
+      creates: '{{ansible_env.HOME}}/fabricant-prod/.secrets/minio_admin_password.txt'
   - name: Create docker network caddy_proxy
     become: true
     community.docker.docker_network:
@@ -169,7 +169,7 @@
       state: present
   - name: Docker compose
     community.docker.docker_compose_v2:
-      project_src: '{{ansible_env.HOME}}/fabricant/'
+      project_src: '{{ansible_env.HOME}}/fabricant-prod/'
       pull: 'always'
       remove_orphans: true
       remove_volumes: true
