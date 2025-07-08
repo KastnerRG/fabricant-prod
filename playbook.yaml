@@ -79,6 +79,7 @@
         - libffi-dev
         - liblzma-dev
         - sshfs
+        - policykit-1
   - name: Ensure these packages are not installed
     become: true
     ansible.builtin.apt:
