@@ -3,7 +3,7 @@
   vars_files:
     - fabricant_users.yaml
   vars:
-    ansible_python_interpreter: '{{ ansible_env.HOME }}/fabricant-prod/.venv/bin/python'
+    ansible_python_interpreter: '.venv/bin/python'
   tasks:
 # Set up bw
   - name: Install nvm
