@@ -13,28 +13,28 @@ git clone git@github.com:KastnerRG/fabricant.git /home/fabricant-admin/fabricant
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash # install nvm
 source ~/.bashrc # activate nvm
-nvm install v22.9.0 # install node 22.9.0
-nvm exec v22.9.0 # activate node
+nvm install v24.3.0 # install node 24.3.0
+nvm exec v24.3.0 # activate node
 npm install -g @bitwarden/cli # installs bw
 bw config server https://vault.e4e-gateway.ucsd.edu # configures bw to our vault
 bw login # Logs in
 ```
 6. Bootstrap creds
 ```
-bw unlock --raw > ~/fabricant/.bw_session
+bw unlock --raw > ~/fabricant-prod/.bw_session
 ```
-7. Create a venv at `~/fabricant/.venv`
+7. Create a venv at `~/fabricant-prod/.venv`
 ```
-python3.12 -m venv ~/fabricant/.venv`
+python3.12 -m venv ~/fabricant-prod/.venv
 ```
 8. Activate venv
 ```
-source ~/fabricant/.venv/bin/activate
+source ~/fabricant-prod/.venv/bin/activate
 ```
 9. Install dependencies
 ```
 python -m pip install --upgrade pip poetry
-cd ~/fabricant/
+cd ~/fabricant-prod/
 poetry install
 ```
 10. Install
