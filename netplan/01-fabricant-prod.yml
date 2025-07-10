@@ -6,10 +6,10 @@ network:
       dhcp4: false
       dhcp6: false
       addresses:
-        - 137.110.160.98/24
+        - 132.239.95.106/24
       routes:
         - to: default
-          via: 137.110.160.1
+          via: 132.239.95.1
       nameservers:
         addresses:
           - 8.8.8.8
