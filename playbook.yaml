@@ -82,6 +82,7 @@
         - liblzma-dev
         - sshfs
         - policykit-1
+        - cifs-utils
   - name: Ensure these packages are not installed
     become: true
     ansible.builtin.apt:

@@ -122,16 +122,21 @@ class Service:
                         'ansible.cfg').absolute().as_posix()
                     new_env['ANSIBLE_INVENTORY'] = self.PROJECT_ROOT.joinpath(
                         'inventory.yaml').absolute().as_posix()
+                    
+                    self.__log.info("Getting bitwarden session.")
                     bw_session_path = self.PROJECT_ROOT.joinpath('.bw_session')
                     with open(bw_session_path, 'r', encoding='utf-8') as handle:
                         bw_session = handle.read()
                     new_env['BW_SESSION'] = bw_session
+
+                    self.__log.info("Getting ansible playbook executable")
                     playbook_cmd = [
                         '.venv/bin/ansible-playbook',
                     ]
                     if self.CHECK_FLAG:
                         playbook_cmd.append('--check')
 
+                    self.__log.info("Running Ansible Playbook.")
                     playbook_cmd.append('playbook.yaml')
                     playbook_run = subprocess.check_call(
                         playbook_cmd, env=new_env, cwd=self.PROJECT_ROOT)
@@ -140,12 +145,14 @@ class Service:
                     # docker_client = docker.from_env()
                     # docker_client.images.prune()
 
+                    self.__log.info("Installing poetry.")
                     poetry_install = subprocess.check_call(
                         ['.venv/bin/poetry', 'install'], env=new_env)
                     self.set_retval('poetry-install', poetry_install)
                     self.last_run = dt.datetime.now()
                     self.last_deploy_time = dt.datetime.now()
 
+                    self.__log("Redeploying...")
                     exec_args = sys.executable, os.path.abspath(
                         __file__), *sys.argv[1:]
                     self.__log.info('Redeploy with args %s', exec_args)
