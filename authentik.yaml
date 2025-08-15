@@ -3,7 +3,7 @@
     cmd: scripts/deploy_authentik_pass.sh
     creates: "{{ansible_env.HOME}}/fabricant-prod/.secrets/authentik_admin_password.env"
     executable: /bin/bash
-    chdir: "{{ansible_env.HOME}}/fabricant"
+    chdir: "{{ansible_env.HOME}}/fabricant-prod"
 - name: Ensure authentik redis dir exists
   become: true
   ansible.builtin.file:
