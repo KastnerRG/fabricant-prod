@@ -116,7 +116,7 @@ services:
       - 5434:5432
     networks:
       - authentik
-    # user: "${USER_ID}:${GROUP_ID}"
+    user: "${USER_ID}:${GROUP_ID}"
   redis_authentik:
     image: docker.io/library/redis:8.2.0-alpine
     container_name: redis_authentik
