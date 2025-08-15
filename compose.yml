@@ -215,6 +215,8 @@ secrets:
     file: .secrets/gf_admin_password.txt
   postgres_admin_password:
     file: .secrets/postgres_admin_password.txt
+  authentik_postgres_admin_password:
+    file: .secrets/authentik_postgres_admin_password.txt
   minio_admin_password:
     file: .secrets/minio_admin_password.txt
 networks:
