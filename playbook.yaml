@@ -157,6 +157,8 @@
       creates: '{{ansible_env.HOME}}/fabricant-prod/.secrets/gf_admin_password.txt'
   - name: Setup Label Studio
     import_tasks: label_studio.yaml
+  - name: Setup authentik
+    import_tasks: authentik.yaml
   
 # This always at the end
   - name: Deploy Docker Secrets
