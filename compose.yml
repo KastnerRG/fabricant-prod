@@ -156,10 +156,10 @@ services:
       caddy: auth.fabricant.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 9000}}"
     depends_on:
-      postgresql:
-        postgres_authentik: service_healthy
-      redis:
-        redis_authentik: service_healthy
+      postgres_authentik:
+        condition: service_healthy
+      redis_authentik:
+        condition: service_healthy
   authentik_worker:
     image: ghcr.io/goauthentik/server:2025.6.4
     restart: unless-stopped
