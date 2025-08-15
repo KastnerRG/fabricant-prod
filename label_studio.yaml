@@ -3,7 +3,7 @@
     cmd: scripts/deploy_label_studio_pass.sh
     creates: "{{ansible_env.HOME}}/fabricant-prod/.secrets/label_studio_admin_password_pg.env"
     executable: /bin/bash
-    chdir: "{{ansible_env.HOME}}/fabricant"
+    chdir: "{{ansible_env.HOME}}/fabricant-prod"
 - name: Ensure label studio admin group exists
   become: true
   ansible.builtin.group:
