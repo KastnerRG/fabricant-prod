@@ -150,7 +150,6 @@ services:
       caddy.reverse_proxy: "{{upstreams 9000}}"
     depends_on:
       postgres_authentik:
-        condition: service_healthy
       redis_authentik:
         condition: service_healthy
   authentik_worker:
@@ -180,7 +179,6 @@ services:
       - authentik
     depends_on:
       postgres_authentik:
-        condition: service_healthy
       redis_authentik:
         condition: service_healthy
   
