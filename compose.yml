@@ -90,25 +90,129 @@ services:
     env_file:
       - .secrets/label_studio_admin_password_pg.env
 
-  minio:
-    image: quay.io/minio/minio
-    container_name: minio
-    restart: always
-    volumes:
-      - ./minio:/data
+  postgres_authentik:
+    image: postgres:16.10
+    container_name: postgres_authentik
+    restart: unless-stopped
+    shm_size: 128 mb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
     environment:
-      MINIO_ROOT_USER: e4e_minio_admin
-      MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_admin_password
-    command: server /data --console-address ":9001"
+      POSTGRES_PASSWORD_FILE: /run/secrets/authentik_postgres_admin_password
+    volumes:
+      - ./authentik/postgres/data/:/var/lib/postgresql/data/:rw
+      - ./authentik/postgres/config/:/etc/postgresql/:ro
+      - ./authentik/postgres/scripts/:/docker-entrypoint-initdb.d/:ro
+      - /etc/passwd:/etc/passwd:ro
     secrets:
-      - minio_admin_password
+      - authentik_postgres_admin_password
+    command: --config_file=/etc/postgresql/postgres.conf
+    ports:
+      - 5434:5432
     networks:
+      - authentik
+    user: "${USER_ID}:${GROUP_ID}"
+  redis_authentik:
+    image: docker.io/library/redis:8.2.0-alpine
+    container_name: redis_authentik
+    command: --save 60 1 --loglevel warning
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    networks:
+      - authentik
+    volumes:
+      - ./authentik/redis/data:/data
+    user: "${USER_ID}:${GROUP_ID}"
+  authentik_server:
+    image: ghcr.io/goauthentik/server:2025.6.4
+    restart: unless-stopped
+    command: server
+    environment:
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
+      AUTHENTIK_REDIS__HOST: redis_authentik
+      AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik_db
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+    volumes:
+      - ./authentik/media:/media
+      - ./authentik/custom-templates:/templates
+    env_file:
+      - .secrets/authentik_admin_password.env
+    user: "${USER_ID}:${GROUP_ID}"
+    networks:
+      - authentik
       - caddy_proxy
     labels:
-      caddy_0: s3.fabricant.ucsd.edu
-      caddy_0.reverse_proxy: "{{upstreams 9000}}"
-      caddy_1: mc.fabricant.ucsd.edu
-      caddy_1.reverse_proxy: "{{upstreams 9001}}"
+      caddy: auth.fabricant.ucsd.edu
+      caddy.reverse_proxy: "{{upstreams 9000}}"
+    depends_on:
+      postgresql:
+        postgres_authentik: service_healthy
+      redis:
+        redis_authentik: service_healthy
+  authentik_worker:
+    image: ghcr.io/goauthentik/server:2025.6.4
+    restart: unless-stopped
+    command: worker
+    environment:
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
+      AUTHENTIK_REDIS__HOST: redis_authentik
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik_db
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+    # `user: root` and the docker socket volume are optional.
+    # See more for the docker socket integration here:
+    # https://goauthentik.io/docs/outposts/integrations/docker
+    # Removing `user: root` also prevents the worker from fixing the permissions
+    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+    # (1000:1000 by default)
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./authentik/media:/media
+      - ./authentik/certs:/certs
+      - ./authentik/custom-templates:/templates
+    env_file:
+      - .secrets/authentik_admin_password.env
+    networks:
+      - authentik
+    depends_on:
+      postgres_authentik:
+        condition: service_healthy
+      redis_authentik:
+        condition: service_healthy
+  
+
+  # minio:
+  #   image: quay.io/minio/minio
+  #   container_name: minio
+  #   restart: always
+  #   volumes:
+  #     - ./minio:/data
+  #   environment:
+  #     MINIO_ROOT_USER: e4e_minio_admin
+  #     MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_admin_password
+  #   command: server /data --console-address ":9001"
+  #   secrets:
+  #     - minio_admin_password
+  #   networks:
+  #     - caddy_proxy
+  #   labels:
+  #     caddy_0: s3.fabricant.ucsd.edu
+  #     caddy_0.reverse_proxy: "{{upstreams 9000}}"
+  #     caddy_1: mc.fabricant.ucsd.edu
+  #     caddy_1.reverse_proxy: "{{upstreams 9001}}"
 secrets:
   grafana_e4eadmin_password:
     file: .secrets/gf_admin_password.txt
@@ -118,6 +222,7 @@ secrets:
     file: .secrets/minio_admin_password.txt
 networks:
   label_studio:
+  authentik:
   caddy_proxy:
     external: true
 
