@@ -138,12 +138,10 @@ services:
     restart: unless-stopped
     command: server
     environment:
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
       AUTHENTIK_REDIS__HOST: redis_authentik
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik_db
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
     volumes:
       - ./authentik/media:/media
       - ./authentik/custom-templates:/templates
@@ -166,12 +164,10 @@ services:
     restart: unless-stopped
     command: worker
     environment:
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
       AUTHENTIK_REDIS__HOST: redis_authentik
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik_db
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
     # `user: root` and the docker socket volume are optional.
     # See more for the docker socket integration here:
     # https://goauthentik.io/docs/outposts/integrations/docker
