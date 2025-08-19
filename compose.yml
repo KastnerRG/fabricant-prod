@@ -190,7 +190,14 @@ services:
         condition: service_healthy
       redis_authentik:
         condition: service_healthy
-  
+
+  free_ipa_server:
+    image: freeipa-server-container
+    restart: unless-stopped
+    container_name: freeipa-server
+    volume:
+      - ./free-ipa:/data:Z
+    user: "${USER_ID}:${GROUP_ID}"
 
   # minio:
   #   image: quay.io/minio/minio
