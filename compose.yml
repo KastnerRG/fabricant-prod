@@ -192,10 +192,10 @@ services:
         condition: service_healthy
 
   free_ipa_server:
-    image: freeipa-server-container
+    image: freeipa/freeipa-server
     restart: unless-stopped
     container_name: freeipa-server
-    volume:
+    volumes:
       - ./free-ipa:/data:Z
     user: "${USER_ID}:${GROUP_ID}"
 
