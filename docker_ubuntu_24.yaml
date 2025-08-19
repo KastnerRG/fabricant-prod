@@ -40,3 +40,4 @@
     name: fabricant-admin-docker
     comment: Docker Remapped Fabricant Admin
     uid: "{{ 100000 + fabricant_admin_id.stdout | int  }}"
+    groups: docker
