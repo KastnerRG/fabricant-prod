@@ -31,7 +31,7 @@
     mode: '0622' # user read/write, group read
 
 - name: Get Docker GID
-  command: /bin/bash ./scripts/get_docker_gid.sh
+  command: /bin/bash {{ansible_env.HOME}}/fabricant-prod/scripts/get_docker_gid.sh
   register: docker_group_id
 
 - name: Ensure group "docker-remap-docker" exists with correct gid
