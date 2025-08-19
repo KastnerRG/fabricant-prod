@@ -40,6 +40,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./caddy-data:/data
+    user: "${USER_ID}:${GROUP_ID}"
   
   postgres_label_studio:
     image: postgres:16.4
