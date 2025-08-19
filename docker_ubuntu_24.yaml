@@ -29,3 +29,13 @@
     owner: root
     group: root
     mode: '0622' # user read/write, group read
+
+- name: Get Fabricant Admin UID
+  command: /usr/bin/id -u fabricant-admin
+  register: fabricant_admin_id
+
+- name: Add the user 'fabricant-admin-docker'
+  ansible.builtin.user:
+    name: fabricant-admin-docker
+    comment: Docker Remapped Fabricant Admin
+    uid: {{ 100000 + fabricant_admin_id.stdout | int  }}

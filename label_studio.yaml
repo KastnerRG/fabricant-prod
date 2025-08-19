@@ -21,8 +21,8 @@
 - name: Ensure label studio data dir exists
   become: true
   ansible.builtin.file:
-    group: fabricant-admin
-    owner: fabricant-admin
+    group: fabricant-admin-docker
+    owner: fabricant-admin-docker
     path: "{{ansible_env.HOME}}/fabricant-prod/label_studio_data_pg"
     state: directory
     mode: '0777'
