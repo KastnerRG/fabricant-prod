@@ -22,7 +22,7 @@
   become: true
   ansible.builtin.file:
     group: fabricant-admin
-    owner: fabricant-admin-remap-docker
+    owner: fabricant-admin
     path: "{{ansible_env.HOME}}/fabricant-prod/label_studio_data_pg"
     state: directory
     mode: '0777'

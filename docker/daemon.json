@@ -1,6 +1,5 @@
 {
     "metrics-addr": "0.0.0.0:9323",
-    "userns-remap": "default",
     "builder": {
         "gc": {
             "enabled": true,
