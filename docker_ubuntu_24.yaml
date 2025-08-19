@@ -35,6 +35,7 @@
   register: fabricant_admin_id
 
 - name: Add the user 'fabricant-admin-docker'
+  become: true
   ansible.builtin.user:
     name: fabricant-admin-docker
     comment: Docker Remapped Fabricant Admin
