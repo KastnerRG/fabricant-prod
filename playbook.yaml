@@ -83,7 +83,7 @@
         - sshfs
         - policykit-1
         - cifs-utils
-        - setfacl
+        - acl
   - name: Ensure these packages are not installed
     become: true
     ansible.builtin.apt:
