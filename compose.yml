@@ -35,6 +35,7 @@ services:
         aliases:
           - s3.fabricant.ucsd.edu
           - mc.fabricant.ucsd.edu
+          - auth.fabricant.ucsd.edu
           - labeler.e4e.ucsd.edu
           - data.smartfin.e4e.ucsd.edu
     volumes:

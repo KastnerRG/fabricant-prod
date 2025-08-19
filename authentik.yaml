@@ -7,8 +7,8 @@
 - name: Ensure authentik redis dir exists
   become: true
   ansible.builtin.file:
-    group: fabricant-admin-docker
-    owner: fabricant-admin-docker
+    group: fabricant-admin-remap-docker
+    owner: fabricant-admin
     path: "{{ansible_env.HOME}}/fabricant-prod/authentik/redis/data"
     state: directory
     mode: '0777'

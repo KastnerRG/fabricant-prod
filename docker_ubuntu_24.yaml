@@ -30,14 +30,34 @@
     group: root
     mode: '0622' # user read/write, group read
 
+- name: Get Docker GID
+  command: "/usr/bin/getent group docker | /usr/bin/cut -d: -f3"
+  register: docker_group_id
+
+- name: Ensure group "docker-remap-docker" exists with correct gid
+  become: true
+  ansible.builtin.group:
+    name: docker-remap-docker
+    state: present
+    gid: "{{ 100000 + docker_group_id | int }}"
+
+- name: Grant group docker-remap-docker read access to a file
+  become: true
+  ansible.posix.acl:
+    path: /var/run/docker.sock
+    entity: docker-remap-docker
+    etype: group
+    permissions: rw
+    state: present
+
 - name: Get Fabricant Admin UID
   command: /usr/bin/id -u fabricant-admin
   register: fabricant_admin_id
 
-- name: Add the user 'fabricant-admin-docker'
+- name: Add the user 'fabricant-admin-remap-docker'
   become: true
   ansible.builtin.user:
-    name: fabricant-admin-docker
+    name: fabricant-admin-remap-docker
     comment: Docker Remapped Fabricant Admin
     uid: "{{ 100000 + fabricant_admin_id.stdout | int  }}"
-    groups: docker
+    groups: docker-remap-docker
