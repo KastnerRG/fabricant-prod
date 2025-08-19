@@ -192,7 +192,7 @@ services:
         condition: service_healthy
 
   free_ipa_server:
-    image: freeipa/freeipa-server
+    image: freeipa/freeipa-server:fedora-42-4.12.2
     restart: unless-stopped
     container_name: freeipa-server
     volumes:
