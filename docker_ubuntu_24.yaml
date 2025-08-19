@@ -31,7 +31,7 @@
     mode: '0622' # user read/write, group read
 
 - name: Get Docker GID
-  command: "/usr/bin/getent group docker | /usr/bin/cut -d: -f3"
+  command: /bin/bash ./scripts/get_docker_gid.sh
   register: docker_group_id
 
 - name: Ensure group "docker-remap-docker" exists with correct gid
