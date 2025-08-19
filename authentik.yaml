@@ -12,11 +12,3 @@
     path: "{{ansible_env.HOME}}/fabricant-prod/authentik/redis/data"
     state: directory
     mode: '0777'
-- name: Ensure freeipa dir exists
-  become: true
-  ansible.builtin.file:
-    group: fabricant-admin
-    owner: fabricant-admin
-    path: "{{ansible_env.HOME}}/fabricant-prod/free-ipa"
-    state: directory
-    mode: '0777'

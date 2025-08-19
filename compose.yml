@@ -191,15 +191,6 @@ services:
       redis_authentik:
         condition: service_healthy
 
-  free_ipa_server:
-    image: freeipa/freeipa-server:fedora-42-4.12.2
-    restart: unless-stopped
-    container_name: freeipa-server
-    privileged: true
-    volumes:
-      - ./free-ipa:/data:Z
-    user: "${USER_ID}:${GROUP_ID}"
-
   # minio:
   #   image: quay.io/minio/minio
   #   container_name: minio
