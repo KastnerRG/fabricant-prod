@@ -37,6 +37,7 @@ services:
           - mc.fabricant.ucsd.edu
           - auth.fabricant.ucsd.edu
           - labeler.e4e.ucsd.edu
+          - orchestrator.fishsense.e4e.ucsd.edu
           - data.smartfin.e4e.ucsd.edu
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
