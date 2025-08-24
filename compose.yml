@@ -137,6 +137,7 @@ services:
     user: "${USER_ID}:${GROUP_ID}"
   authentik_server:
     image: ghcr.io/goauthentik/server:2025.6.4
+    container_name: authentik_server
     restart: unless-stopped
     command: server
     environment:
