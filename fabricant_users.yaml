@@ -11,6 +11,7 @@ users:
     sudo_allow:
       - /usr/bin/su fs_services
       - /usr/bin/su sf_services
+      - /usr/bin/su - sf_services
   - username: d.zuberi.160
     name: Danial Zuberi
     authorized_keys:
