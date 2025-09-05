@@ -23,6 +23,9 @@ services:
       caddy: wiki.fabricant.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 3010}}"
     restart: unless-stopped
+    networks:
+      - affine
+      - caddy_proxy
 
   affine_migration:
     image: ghcr.io/toeverything/affine:0.24.0
@@ -43,6 +46,8 @@ services:
         condition: service_healthy
       affine_redis:
         condition: service_healthy
+    networks:
+      - affine
 
   affine_redis:
     image: redis
@@ -53,6 +58,8 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+    networks:
+      - affine
     user: "${USER_ID}:${GROUP_ID}"
 
   affine_postgres:
