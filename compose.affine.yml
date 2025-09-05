@@ -1,6 +1,6 @@
 services:
   affine:
-    image: ghcr.io/toeverything/affine:0.24.0
+    image: ghcr.io/toeverything/affine:0.24.1
     container_name: affine_server
     depends_on:
       affine_redis:
@@ -29,7 +29,7 @@ services:
       - caddy_proxy
 
   affine_migration:
-    image: ghcr.io/toeverything/affine:0.24.0
+    image: ghcr.io/toeverything/affine:0.24.1
     container_name: affine_migration_job
     volumes:
       # custom configurations
