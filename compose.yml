@@ -66,7 +66,7 @@ services:
 
   label_studio_pg:
     container_name: label-studio
-    image: heartexlabs/label-studio:hf-1.16.0
+    image: heartexlabs/label-studio:1.16.0
     restart: unless-stopped
     depends_on:
       - postgres_label_studio
@@ -81,6 +81,7 @@ services:
       - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/data
       - LABEL_STUDIO_DISABLE_SIGNUP_WITHOUT_LINK=true
       - LABEL_STUDIO_USERNAME=e4e@ucsd.edu
+      - LABEL_STUDIO_HOST=https://labeler.e4e.ucsd.edu
       - CSRF_TRUSTED_ORIGINS=https://labeler.e4e.ucsd.edu
       - DJANGO_DB=default
       - POSTGRE_NAME=label_studio
