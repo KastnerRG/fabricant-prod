@@ -1,8 +1,0 @@
-CREATE DATABASE affine;
-
-CREATE ROLE affine WITH
-    LOGIN
-    ENCRYPTED PASSWORD 'SCRAM-SHA-256$4096:UNoOMfEWV++0Gd6/wmZ6Mw==$iijDKpQa1ImNP4LWO+NMrbOPRtSnQHx2UioOxUCAu0s=:KdgwJmXlqCWxFfxEmZu9dqbrdrjfGYJDhLbKs2MpHjk=';
-GRANT ALL PRIVILEGES ON DATABASE affine TO affine;
-\c affine postgres
-GRANT ALL ON SCHEMA public TO affine;

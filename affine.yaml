@@ -1,8 +1,0 @@
-- name: Ensure affine postgres dir exists
-  become: true
-  ansible.builtin.file:
-    group: fabricant-admin
-    owner: fabricant-admin
-    path: "{{ansible_env.HOME}}/fabricant-prod/affine/postgres/data"
-    state: directory
-    mode: '0777'

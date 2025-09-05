@@ -1,6 +1,5 @@
 include:
   - compose.label-studio.yml
-  - compose.affine.yml
 
 services:
   prometheus:
