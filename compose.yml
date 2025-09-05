@@ -66,7 +66,7 @@ services:
 
   label_studio_pg:
     container_name: label-studio
-    image: heartexlabs/label-studio:1.18.0
+    image: heartexlabs/label-studio:1.19.0
     restart: unless-stopped
     depends_on:
       - postgres_label_studio
