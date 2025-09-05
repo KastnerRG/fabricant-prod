@@ -18,7 +18,6 @@ services:
     environment:
       - REDIS_SERVER_HOST=affine_redis
       - AFFINE_INDEXER_ENABLED=false
-    user: "${USER_ID}:${GROUP_ID}"
     labels:
       caddy: wiki.fabricant.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 3010}}"
@@ -37,7 +36,6 @@ services:
     environment:
       - REDIS_SERVER_HOST=affine_redis
       - AFFINE_INDEXER_ENABLED=false
-    user: "${USER_ID}:${GROUP_ID}"
     depends_on:
       affine_postgres:
         condition: service_healthy
@@ -77,6 +75,5 @@ services:
     restart: unless-stopped
     networks:
       - affine
-    user: "${USER_ID}:${GROUP_ID}"
 networks:
   affine:
