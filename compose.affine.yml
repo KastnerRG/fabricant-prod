@@ -60,7 +60,6 @@ services:
     restart: unless-stopped
     networks:
       - affine
-    user: "${USER_ID}:${GROUP_ID}"
 
   affine_postgres:
     image: pgvector/pgvector:pg16
