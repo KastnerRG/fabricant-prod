@@ -15,6 +15,8 @@ services:
       - ./affine/affine/config:/root/.affine/config
     env_file:
       - .secrets/affine_env
+    env:
+      - AFFINE_SERVER_EXTERNAL_URL=https://wiki.fabricant.ucsd.edu
     environment:
       - REDIS_SERVER_HOST=affine_redis
       - AFFINE_INDEXER_ENABLED=false
