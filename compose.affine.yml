@@ -70,7 +70,7 @@ services:
       POSTGRES_INITDB_ARGS: '--data-checksums'
     healthcheck:
       test:
-        ['CMD', 'pg_isready', '-U', "${DB_USERNAME}", '-d', "${DB_DATABASE:-affine}"]
+        ['CMD', 'pg_isready', '-U', "affine", '-d', "affine"]
       interval: 10s
       timeout: 5s
       retries: 5
