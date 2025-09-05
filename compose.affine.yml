@@ -1,0 +1,82 @@
+services:
+  affine:
+    image: ghcr.io/toeverything/affine:0.24.0
+    container_name: affine_server
+    depends_on:
+      affine_redis:
+        condition: service_healthy
+      affine_postgres:
+        condition: service_healthy
+      affine_migration:
+        condition: service_completed_successfully
+    volumes:
+      # custom configurations
+      - ./affine/affine/upload:/root/.affine/storage
+      - ./affine/affine/config:/root/.affine/config
+    env_file:
+      - .env
+    environment:
+      - REDIS_SERVER_HOST=affine_redis
+      - AFFINE_INDEXER_ENABLED=false
+    user: "${USER_ID}:${GROUP_ID}"
+    labels:
+      caddy: wiki.fabricant.ucsd.edu
+      caddy.reverse_proxy: "{{upstreams 3010}}"
+    restart: unless-stopped
+
+  affine_migration:
+    image: ghcr.io/toeverything/affine:0.24.0
+    container_name: affine_migration_job
+    volumes:
+      # custom configurations
+      - ./affine/affine/upload:/root/.affine/storage
+      - ./affine/affine/config:/root/.affine/config
+    command: ['sh', '-c', 'node ./scripts/self-host-predeploy.js']
+    env_file:
+      - .secrets/affine_env
+    environment:
+      - REDIS_SERVER_HOST=affine_redis
+      - AFFINE_INDEXER_ENABLED=false
+    user: "${USER_ID}:${GROUP_ID}"
+    depends_on:
+      affine_postgres:
+        condition: service_healthy
+      affine_redis:
+        condition: service_healthy
+
+  affine_redis:
+    image: redis
+    container_name: affine_redis
+    healthcheck:
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    user: "${USER_ID}:${GROUP_ID}"
+
+  affine_postgres:
+    image: pgvector/pgvector:pg16
+    container_name: affine_postgres
+    volumes:
+      - ./affine/postgres/config/:/etc/postgresql/:ro
+      - ./affine/postgres/scripts/:/docker-entrypoint-initdb.d/:ro
+      - ./affine/postgres/data:/var/lib/postgresql/data
+    env_file:
+      - .secrets/affine_env
+    environment:
+      POSTGRES_USER: affine
+      POSTGRES_DB: affine
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    healthcheck:
+      test:
+        ['CMD', 'pg_isready', '-U', "${DB_USERNAME}", '-d', "${DB_DATABASE:-affine}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - affine
+    user: "${USER_ID}:${GROUP_ID}"
+networks:
+  affine:

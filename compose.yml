@@ -1,5 +1,6 @@
 include:
   - compose.label-studio.yml
+  - compose.affine.yml
 
 services:
   prometheus:
@@ -175,7 +176,6 @@ secrets:
   minio_admin_password:
     file: .secrets/minio_admin_password.txt
 networks:
-  label_studio:
   authentik:
   caddy_proxy:
     external: true

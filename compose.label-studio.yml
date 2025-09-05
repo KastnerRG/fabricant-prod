@@ -51,3 +51,5 @@ services:
       caddy.reverse_proxy: "{{upstreams 8080}}"
     env_file:
       - .secrets/label_studio_admin_password_pg.env
+networks:
+  label_studio:
