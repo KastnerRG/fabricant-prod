@@ -1,4 +1,4 @@
-CREATE DATABASE affine;
+-- CREATE DATABASE affine;
 
 CREATE ROLE affine WITH
     LOGIN
