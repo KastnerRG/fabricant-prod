@@ -14,7 +14,7 @@ services:
       - ./affine/affine/upload:/root/.affine/storage
       - ./affine/affine/config:/root/.affine/config
     env_file:
-      - .env
+      - .secrets/affine_env
     environment:
       - REDIS_SERVER_HOST=affine_redis
       - AFFINE_INDEXER_ENABLED=false
