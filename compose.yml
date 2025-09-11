@@ -1,4 +1,5 @@
 include:
+  - compose.authentik.yml
   - compose.label-studio.yml
 
 services:
@@ -46,105 +47,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./caddy-data:/data
 
-  postgres_authentik:
-    image: postgres:16.10
-    container_name: postgres_authentik
-    restart: unless-stopped
-    shm_size: 128 mb
-    environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/authentik_postgres_admin_password
-    volumes:
-      - ./authentik/postgres/data/:/var/lib/postgresql/data/:rw
-      - ./authentik/postgres/config/:/etc/postgresql/:ro
-      - ./authentik/postgres/scripts/:/docker-entrypoint-initdb.d/:ro
-      - /etc/passwd:/etc/passwd:ro
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      start_period: 20s
-      interval: 30s
-      retries: 5
-      timeout: 5s
-    secrets:
-      - authentik_postgres_admin_password
-    command: --config_file=/etc/postgresql/postgres.conf
-    ports:
-      - 5434:5432
-    networks:
-      - authentik
-    user: "${USER_ID}:${GROUP_ID}"
-  redis_authentik:
-    image: docker.io/library/redis:8.2.0-alpine
-    container_name: redis_authentik
-    command: --save 60 1 --loglevel warning
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
-      start_period: 20s
-      interval: 30s
-      retries: 5
-      timeout: 3s
-    networks:
-      - authentik
-    volumes:
-      - ./authentik/redis/data:/data
-    user: "${USER_ID}:${GROUP_ID}"
-  authentik_server:
-    image: ghcr.io/goauthentik/server:2025.8.1
-    container_name: authentik_server
-    restart: unless-stopped
-    command: server
-    environment:
-      AUTHENTIK_REDIS__HOST: redis_authentik
-      AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
-      AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__NAME: authentik_db
-    volumes:
-      - ./authentik/media:/media
-      - ./authentik/custom-templates:/templates
-    env_file:
-      - .secrets/authentik_admin_password.env
-    user: "${USER_ID}:${GROUP_ID}"
-    networks:
-      - authentik
-      - caddy_proxy
-    labels:
-      caddy: auth.fabricant.ucsd.edu
-      caddy.reverse_proxy: "{{upstreams 9000}}"
-    depends_on:
-      postgres_authentik:
-        condition: service_healthy
-      redis_authentik:
-        condition: service_healthy
-  authentik_worker:
-    image: ghcr.io/goauthentik/server:2025.8.1
-    restart: unless-stopped
-    command: worker
-    environment:
-      AUTHENTIK_REDIS__HOST: redis_authentik
-      AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
-      AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__NAME: authentik_db
-    # `user: root` and the docker socket volume are optional.
-    # See more for the docker socket integration here:
-    # https://goauthentik.io/docs/outposts/integrations/docker
-    # Removing `user: root` also prevents the worker from fixing the permissions
-    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
-    # (1000:1000 by default)
-    user: root
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./authentik/media:/media
-      - ./authentik/certs:/certs
-      - ./authentik/custom-templates:/templates
-    env_file:
-      - .secrets/authentik_admin_password.env
-    networks:
-      - authentik
-    depends_on:
-      postgres_authentik:
-        condition: service_healthy
-      redis_authentik:
-        condition: service_healthy
 
   # minio:
   #   image: quay.io/minio/minio
@@ -168,14 +70,9 @@ services:
 secrets:
   grafana_e4eadmin_password:
     file: .secrets/gf_admin_password.txt
-  postgres_admin_password:
-    file: .secrets/postgres_admin_password.txt
-  authentik_postgres_admin_password:
-    file: .secrets/authentik_postgres_admin_password.txt
   minio_admin_password:
     file: .secrets/minio_admin_password.txt
 networks:
-  authentik:
   caddy_proxy:
     external: true
 
