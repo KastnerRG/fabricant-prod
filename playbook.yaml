@@ -85,6 +85,7 @@
         - cifs-utils
         - acl
         - qemu-guest-agent
+        - nfs-common
   - name: Ensure these packages are not installed
     become: true
     ansible.builtin.apt:
