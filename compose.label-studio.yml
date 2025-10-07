@@ -2,7 +2,7 @@
   
 services:
   postgres_label_studio:
-    image: postgres:16.4
+    image: postgres:16.10
     container_name: postgres_label_studio
     restart: always
     shm_size: 128 mb
@@ -24,7 +24,7 @@ services:
 
   label_studio_pg:
     container_name: label-studio
-    image: heartexlabs/label-studio:1.20.0
+    image: heartexlabs/label-studio:1.21.0
     restart: unless-stopped
     depends_on:
       - postgres_label_studio
@@ -51,6 +51,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 8080}}"
     env_file:
       - .secrets/label_studio_admin_password_pg.env
+
 secrets:
   postgres_admin_password:
     file: .secrets/postgres_admin_password.txt

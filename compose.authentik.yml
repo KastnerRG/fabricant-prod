@@ -27,7 +27,7 @@ services:
     user: "${USER_ID}:${GROUP_ID}"
     
   redis_authentik:
-    image: docker.io/library/redis:8.2.0-alpine
+    image: docker.io/library/redis:8.2.2-alpine
     container_name: redis_authentik
     command: --save 60 1 --loglevel warning
     restart: unless-stopped
@@ -44,7 +44,7 @@ services:
     user: "${USER_ID}:${GROUP_ID}"
 
   authentik_server:
-    image: ghcr.io/goauthentik/server:2025.8.1
+    image: ghcr.io/goauthentik/server:2025.8.4
     container_name: authentik_server
     restart: unless-stopped
     command: server
@@ -72,7 +72,7 @@ services:
         condition: service_healthy
 
   authentik_worker:
-    image: ghcr.io/goauthentik/server:2025.8.1
+    image: ghcr.io/goauthentik/server:2025.8.4 #tied to authentik server
     restart: unless-stopped
     command: worker
     environment:
