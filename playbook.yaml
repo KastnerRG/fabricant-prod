@@ -37,19 +37,20 @@
     community.general.timezone:
       name: America/Los_Angeles
 
-# Set netplan
-  - name: Install netplan config
-    become: true
-    ansible.builtin.copy:
-      src: netplan/01-fabricant-prod.yml
-      dest: /etc/netplan/01-fabricant-prod.yaml
-      owner: root
-      group: root
-      mode: '0600'
-  - name: Netplan Apply
-    become: true
-    ansible.builtin.command:
-      cmd: netplan apply
+# TODO: Renable after testing
+# # Set netplan
+#   - name: Install netplan config
+#     become: true
+#     ansible.builtin.copy:
+#       src: netplan/01-fabricant-prod.yml
+#       dest: /etc/netplan/01-fabricant-prod.yaml
+#       owner: root
+#       group: root
+#       mode: '0600'
+#   - name: Netplan Apply
+#     become: true
+#     ansible.builtin.command:
+#       cmd: netplan apply
 
 # Packages
   - name: Ensure that system is up to date
@@ -97,9 +98,6 @@
         - libcupsfilters2t64
   - import_tasks: unattended-upgrades.yml
 
-# Setup Docker
-  - import_tasks: docker_ubuntu_24.yaml
-
 # Monitoring
   - import_tasks: monitoring.yaml
 
@@ -112,7 +110,6 @@
       installer: '{{ansible_env.HOME}}/installers/qualys_trellix/oec-qualystrellixinstallers-linux.tgz'
 
 # Web Services
-  - import_tasks: web_services.yaml
   - name: Deny SSH login
     become: true
     ansible.builtin.lineinfile:
@@ -164,32 +161,7 @@
     import_tasks: authentik.yaml
   
 # This always at the end
-  - name: Deploy Docker Secrets
-    import_tasks: docker/docker_secrets.yml
-  - name: Deploy minio_admin_password
-    ansible.builtin.shell:
-      cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "mc.fabricant.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant-prod/.secrets/minio_admin_password.txt'
-      chdir: '{{ansible_env.HOME}}/fabricant-prod'
-      creates: '{{ansible_env.HOME}}/fabricant-prod/.secrets/minio_admin_password.txt'
-  - name: Create docker network caddy_proxy
-    become: true
-    community.docker.docker_network:
-      name: caddy_proxy
-      state: present
-  - name: Docker compose
-    community.docker.docker_compose_v2:
-      project_src: '{{ansible_env.HOME}}/fabricant-prod/'
-      pull: 'always'
-      remove_orphans: true
-      remove_volumes: true
-
   handlers:
-  # Restart Docker if necessary.  This happens after ALL tasks are executed, including the docker-compose task.
-  - name: Restart Docker
-    become: true
-    service:
-      name: docker
-      state: restarted
   - name: restart sshd
     become: true
     service:
