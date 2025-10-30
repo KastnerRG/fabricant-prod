@@ -234,7 +234,7 @@ def main():
     parser.add_argument('--project_root', type=Path,
                         help='Ansible project root', default=Path('.'))
     parser.add_argument('--project_branch', type=str,
-                        help='Project branch', default='main')
+                        help='Project branch', default='feature/kube')
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
 
