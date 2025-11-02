@@ -4,8 +4,6 @@ users:
     authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF2Z7LbaDPTNkdnuvFivXTUx8X9gU0ZyWrrYBH7KSmG3 chris@chris-laptop
     expires: "2025-12-31 23:59:59"
-    groups:
-      - docker
     password: $6$w2DjXVZz4/c3NRAC$bIdyTZwZ.Zm26Fh3TSHITus2OhHRweHxGBYrfWe/jGDKIV4WwGbEoycKZKiHVZ53mqUwQRLoTyKK7vWkrpmw70
     sudo_allow:
       - /usr/bin/mount -t cifs *
@@ -18,14 +16,4 @@ users:
     authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIILwsfYNsl6DSg00wOjvTip7GwO+aANfEBn6T3YcAHNG seanh@siloenvy
     expires: "2025-12-31 23:59:59"
-    groups:
-      - docker
     password: $6$rounds=656000$K2VO4J5uMFE3Eb6A$exJwg.2to2a.wP.X/8DSLKz1kJoe9hiP.SmjMg.TzFLPbxsmurhdYCbUYW.naPljdVgtAr9nlERdSR8GObOGb1
-  - username: a.chen.415
-    name: Annabelle Chen
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIH92Lhgn5ui/cjaJO9M3j8MKSEUCHRy50p6j9wiyPH annab@LAPTOP-6J92ST70
-    expires: "2025-08-29 23:59:59"
-    groups:
-      - docker
-    password: $6$rounds=656000$.ZTVvP2x8lycQPVC$0BQHGntMn1p893vtoNNXPPdPfi4VmaL23VImoit16iPae7Ay63ZN0IIae9QhYFnTmY.IpQMpCMkrSC41wiHoE.
