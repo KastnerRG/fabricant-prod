@@ -4,3 +4,9 @@
     name: microk8s
     state: present
     classic: true
+- name: Add user 'fabricant-admin' to 'microk8s'
+  become: yes
+  user:
+    name: fabricant-admin
+    groups: microk8s
+    append: yes
