@@ -10,11 +10,11 @@
     name: fabricant-admin
     groups: microk8s
     append: yes
-- name: Change kube folder ownership
+- name: Recursively change ownership of ~/.kube to fabricant-admin
   become: true
-  tasks:
-    - file:
-        path: /home/fabricant-admin/.kube
-        owner: fabricant-admin
-        group: fabricant-admin
-        state: directory
+  ansible.builtin.file:
+    path: /home/fabricant-admin/.kube
+    state: directory
+    owner: fabricant-admin
+    group: fabricant-admin
+    recurse: yes
