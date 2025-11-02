@@ -101,6 +101,9 @@
 # Monitoring
   - import_tasks: monitoring.yaml
 
+# Kube
+  - import_tasks: kube.yaml
+
 # # UFW
 #   - import_tasks: ufw.yml
 

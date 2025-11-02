@@ -1,0 +1,5 @@
+- name: Install Kube Snap Packages
+  become: true
+  community.general.snap:
+    name:
+      - microk8s
