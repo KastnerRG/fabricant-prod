@@ -18,13 +18,14 @@
     owner: fabricant-admin
     group: fabricant-admin
     recurse: yes
-- name: Enable microk8s addons
-  become: true
-  ansible.builtin.command:
-    cmd: microk8s enable dns dashboard registry
 
 - name: Install microceph Snap Package
   become: true
   community.general.snap:
     name: microceph
     state: present
+
+- name: Enable microk8s addons
+  become: true
+  ansible.builtin.command:
+    cmd: microk8s enable dns dashboard registry rook-ceph
