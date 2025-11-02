@@ -18,3 +18,7 @@
     owner: fabricant-admin
     group: fabricant-admin
     recurse: yes
+- name: Enable microk8s addons
+  become: true
+  ansible.builtin.command:
+    cmd: microk8s enable dns dashboard registry
