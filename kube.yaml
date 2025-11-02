@@ -5,14 +5,13 @@
     state: present
     classic: true
 - name: Add user 'fabricant-admin' to 'microk8s'
-  become: yes
+  become: true
   user:
     name: fabricant-admin
     groups: microk8s
     append: yes
 - name: Change kube folder ownership
-  become: yes
-  hosts: microk8s
+  become: true
   tasks:
     - file:
         path: /home/fabricant-admin/.kube
