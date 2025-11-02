@@ -1,4 +1,4 @@
-- name: Install Kube Snap Packages
+- name: Install microk8s Snap Package
   become: true
   community.general.snap:
     name: microk8s
@@ -10,3 +10,12 @@
     name: fabricant-admin
     groups: microk8s
     append: yes
+- name: Change kube folder ownership
+  become: yes
+  hosts: microk8s
+  tasks:
+    - file:
+        path: /home/fabricant-admin/.kube
+        owner: fabricant-admin
+        group: fabricant-admin
+        state: directory
