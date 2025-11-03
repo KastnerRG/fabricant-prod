@@ -24,18 +24,6 @@
   community.general.snap:
     name: microceph
     state: present
-- name: Configure global osd_pool_default_size 2
-  become: true
-  ansible.builtin.command:
-    cmd: microceph.ceph config set global osd_pool_default_size 2
-- name: Configure mgr mgr_standby_modules false
-  become: true
-  ansible.builtin.command:
-    cmd: microceph.ceph config set mgr mgr_standby_modules false
-- name: Configure mgr mgr_standby_modules false
-  become: true
-  ansible.builtin.command:
-    cmd: microceph.ceph config set osd osd_crush_chooseleaf_type 0
 
 - name: Enable microk8s addons
   become: true
