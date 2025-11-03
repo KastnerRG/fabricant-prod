@@ -29,3 +29,9 @@
   become: true
   ansible.builtin.command:
     cmd: microk8s enable dns dashboard registry rook-ceph
+
+- name: Install helm Snap Package
+  become: true
+  community.general.snap:
+    name: helm
+    state: present
