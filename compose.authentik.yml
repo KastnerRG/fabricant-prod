@@ -62,7 +62,7 @@ services:
     networks:
       - authentik
       - traefik_proxy
-    labels:
+    # labels:
       # - "traefik.enable=true"
       # - "traefik.http.routers.authentik_server.rule=Host(`auth.fabricant.ucsd.edu`)"
       # - "traefik.http.routers.authentik_server.entrypoints=websecure"
