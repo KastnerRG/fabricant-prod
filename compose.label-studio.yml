@@ -50,7 +50,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.label-studio.rule=Host(`labeler.e4e.ucsd.edu`)"
       - "traefik.http.routers.label-studio.entrypoints=websecure"
-      - "traefik.http.routers.label-studio.tls.certresolver=myhttpchallenge"
+      - "traefik.http.routers.label-studio.tls.certresolver=le"
     env_file:
       - .secrets/label_studio_admin_password_pg.env
 
