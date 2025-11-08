@@ -53,7 +53,6 @@ services:
       - "--certificatesresolvers.le.acme.email=e4e@ucsd.edu"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
       - "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:[a-z-.]+}.ucsd.edu`)"
