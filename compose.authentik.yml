@@ -61,10 +61,12 @@ services:
     user: "${USER_ID}:${GROUP_ID}"
     networks:
       - authentik
-      - caddy_proxy
+      - traefik_proxy
     labels:
-      caddy: auth.fabricant.ucsd.edu
-      caddy.reverse_proxy: "{{upstreams 9000}}"
+      - "traefik.enable=true"
+      - "traefik.http.routers.label-studio.rule=Host(`auth.fabricant.ucsd.edu`)"
+      - "traefik.http.routers.label-studio.entrypoints=websecure"
+      - "traefik.http.routers.label-studio.tls.certresolver=myhttpchallenge"
     depends_on:
       postgres_authentik:
         condition: service_healthy
