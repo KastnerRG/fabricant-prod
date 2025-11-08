@@ -26,28 +26,62 @@ services:
       - ./alertmanager:/etc/alertmanager:ro
     ports:
       - 9093:9093
-  
-  caddy:
-    image: lucaslorentz/caddy-docker-proxy:2.10.0
-    container_name: caddy
+
+  traefik:
+    image: traefik:v3.5.4
+    container_name: traefik
     restart: always
     ports:
       - 80:80
       - 443:443
-    environment:
-      - CADDY_INGRESS_NETWORKS=caddy_proxy
-    networks:
-      caddy_proxy:
-        aliases:
-          - s3.fabricant.ucsd.edu
-          # - mc.fabricant.ucsd.edu
-          - auth.fabricant.ucsd.edu
-          - labeler.e4e.ucsd.edu
-          - orchestrator.fishsense.e4e.ucsd.edu
-          - data.smartfin.e4e.ucsd.edu
+      - 8080:8080
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./caddy-data:/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik-data/letsencrypt:/letsencrypt:z
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge=true"
+      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myhttpchallenge.acme.email=e4e@ucsd.edu"
+      - "--certificatesresolvers.myhttpchallenge.acme.storage=/letsencrypt/acme.json"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:[a-z-.]+}.ucsd.edu`)"
+      - "traefik.http.routers.http-catchall.entrypoints=web"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+    networks:
+      - traefik_proxy
+  
+  # caddy:
+  #   image: lucaslorentz/caddy-docker-proxy:2.10.0
+  #   container_name: caddy
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   environment:
+  #     - CADDY_INGRESS_NETWORKS=caddy_proxy
+  #   networks:
+  #     caddy_proxy:
+  #       aliases:
+  #         - s3.fabricant.ucsd.edu
+  #         # - mc.fabricant.ucsd.edu
+  #         - auth.fabricant.ucsd.edu
+  #         - labeler.e4e.ucsd.edu
+  #         - orchestrator.fishsense.e4e.ucsd.edu
+  #         - data.smartfin.e4e.ucsd.edu
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./caddy-data:/data
 
 
   # minio:
@@ -75,6 +109,6 @@ secrets:
   # minio_admin_password:
   #   file: .secrets/minio_admin_password.txt
 networks:
-  caddy_proxy:
+  traefik_proxy:
     external: true
 
