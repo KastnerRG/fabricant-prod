@@ -109,6 +109,8 @@ secrets:
   # minio_admin_password:
   #   file: .secrets/minio_admin_password.txt
 networks:
+  caddy_proxy:
+    external: true
   traefik_proxy:
     external: true
 
