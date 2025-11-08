@@ -30,7 +30,7 @@ services:
       - postgres_label_studio
     networks:
       - label_studio
-      - caddy_proxy
+      - traefik_proxy
     volumes:
       - ./label_studio_data_pg:/label-studio/data
       - /share/label-studio/files:/data
@@ -47,8 +47,10 @@ services:
       - POSTGRE_PORT=5432
       - POSTGRE_HOST=postgres_label_studio
     labels:
-      caddy: labeler.e4e.ucsd.edu
-      caddy.reverse_proxy: "{{upstreams 8080}}"
+      - "traefik.enable=true"
+      - "traefik.http.routers.label-studio.rule=Host(`labeler.e4e.ucsd.edu`)"
+      - "traefik.http.routers.label-studio.entrypoints=websecure"
+      - "traefik.http.routers.label-studio.tls.certresolver=myhttpchallenge"
     env_file:
       - .secrets/label_studio_admin_password_pg.env
 
