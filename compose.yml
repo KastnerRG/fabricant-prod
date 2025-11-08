@@ -62,29 +62,14 @@ services:
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
     # user: "${USER_ID}:${GROUP_ID}"
     networks:
-      - traefik_proxy
-  
-  # caddy:
-  #   image: lucaslorentz/caddy-docker-proxy:2.10.0
-  #   container_name: caddy
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   environment:
-  #     - CADDY_INGRESS_NETWORKS=caddy_proxy
-  #   networks:
-  #     caddy_proxy:
-  #       aliases:
-  #         - s3.fabricant.ucsd.edu
-  #         # - mc.fabricant.ucsd.edu
-  #         - auth.fabricant.ucsd.edu
-  #         - labeler.e4e.ucsd.edu
-  #         - orchestrator.fishsense.e4e.ucsd.edu
-  #         - data.smartfin.e4e.ucsd.edu
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - ./caddy-data:/data
+      traefik_proxy:
+        aliases:
+          - s3.fabricant.ucsd.edu
+          # - mc.fabricant.ucsd.edu
+          - auth.fabricant.ucsd.edu
+          - labeler.e4e.ucsd.edu
+          - orchestrator.fishsense.e4e.ucsd.edu
+          - data.smartfin.e4e.ucsd.edu
 
 
   # minio:
