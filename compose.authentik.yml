@@ -64,9 +64,9 @@ services:
       - traefik_proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.label-studio.rule=Host(`auth.fabricant.ucsd.edu`)"
-      - "traefik.http.routers.label-studio.entrypoints=websecure"
-      - "traefik.http.routers.label-studio.tls.certresolver=le"
+      - "traefik.http.routers.authentik_server.rule=Host(`auth.fabricant.ucsd.edu`)"
+      - "traefik.http.routers.authentik_server.entrypoints=websecure"
+      - "traefik.http.routers.authentik_server.tls.certresolver=letsencrypt"
       - "traefik.http.services.authentik_server.loadbalancer.server.port=9000"
     depends_on:
       postgres_authentik:
