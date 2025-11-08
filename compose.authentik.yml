@@ -67,6 +67,7 @@ services:
       - "traefik.http.routers.label-studio.rule=Host(`auth.fabricant.ucsd.edu`)"
       - "traefik.http.routers.label-studio.entrypoints=websecure"
       - "traefik.http.routers.label-studio.tls.certresolver=le"
+      - "traefik.http.services.authentik_server.loadbalancer.server.port=9000"
     depends_on:
       postgres_authentik:
         condition: service_healthy
