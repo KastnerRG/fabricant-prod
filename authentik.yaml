@@ -4,11 +4,10 @@
     creates: "{{ansible_env.HOME}}/fabricant-prod/.secrets/authentik_admin_password.env"
     executable: /bin/bash
     chdir: "{{ansible_env.HOME}}/fabricant-prod"
-- name: Ensure authentik redis dir exists
-  become: true
-  ansible.builtin.file:
-    group: fabricant-admin
-    owner: fabricant-admin
-    path: "{{ansible_env.HOME}}/fabricant-prod/authentik/redis/data"
-    state: directory
-    mode: '0777'
+
+- name: Deploy authentik traefik token
+  ansible.builtin.script:
+    cmd: scripts/deploy_authentik_traefik_token.sh
+    creates: "{{ansible_env.HOME}}/fabricant-prod/.secrets/authentik_traefik_token.env"
+    executable: /bin/bash
+    chdir: "{{ansible_env.HOME}}/fabricant-prod"
