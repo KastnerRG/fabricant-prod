@@ -1,22 +1,4 @@
 users:
-  - username: d.richmond.520
-    name: Dustin Richmond
-    authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDkpVxAs0YRjXVvxXpIMIV1pVOzOpyVomyvPTLMIHFjjjhYt4coy/IjDqU5z27hH04zbEufkAEbkqvcS+NqQIJlj2mEuT58xcSLXksYLRttcEMW+QdrhcGPv+phOijbjaSPEHk6of4cDGwDQLv/UxwDS/e1rpwjJ2ylYRZbJ581IKmkBuuhqRlgUycIEAIMHyAeWIt12MpHMrmSBj4mUZjvc8sfvfiP3NmgKR2gapHwg2H7kGIvLWSjh7IZUWehMCADQpTaPC/M89X9vVUtocH1kMpMo/mFMTdkXLWt9Y74Uaf0hqP0MdC/AABXGX9CocCmSpHDxcUcjAyXsFRawlwu0D8mql12ijz6Q41oZjx3tPg0eqn8n9xnpCkKRP+w4QG7Cf4kdpleudZmSP7JJV0V4XRwl+E03NQayaDBUsk91oCZesY2ghInVrfJRgdA9AAUMlazAZuMYYmGsebsW3oNyurrRD2Bgy++1fPe9FQMmY4e5ik8AjCMxbMamsTqMwY37F5UWym/UTNcxKqvlldvjhU4wo4AqlZsSK0LW87C6AYc2z/ib0tm5sr3yEZ6/qWsWfQHsQiMg0LxTBXT1rylDcBdCqaGyF+xfeZgeyjasE30DtyK2tQ5bXfalrivKbhr+Qp+dZW9w2onM8ItqW2Bg/PKg7kJOs8HNiCvvMOgw== drichmond@ucsc.edu
-    expires: "2025-06-30 23:59:59"
-    password: $6$rounds=656000$RjhTWCvs4qTA5PpO$hNDytIgfFelqMYK3IW/SU3VgVscM4kSqlAVYaJHHB3/cD4uNs5vKeteWqn3Ui33QYmowWJ4x4pZ4DyVM6GuK9/
-  - username: c.drewes.553
-    name: Colin Drewes
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHVqMFy25taTInX70+T50XO7X6tHLgGMn3tvs6CDfc3 drewes@cs.stanford.edu
-    expires: "2025-06-30 23:59:59"
-    password: $6$rounds=656000$zWVKrp2suJXdBnu4$duB92XyWnf0CCP.hQFirCmFVfBBX03xbG0FrDwjMoILKNFV9BU1a0aN.dW0Wwn905C29CNBHPurc6M1HQ/WLO/
-  - username: a.meza.278
-    name: Andy Meza
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL7Mhf8PjoZtqFY/AnJ+aVfenrOu2B1XVdtPANHJ26L7 anmeza@ucsd.edu
-    expires: "2025-06-30 23:59:59"
-    password: $6$rounds=656000$bF90U3xSRcsiMV4u$CBCIHcqN8s/UCprTbMP2XC1nBkBVb7duL9AsXKaRnJyOQOApbcId8IeZOfsK8Rj9HfMIVxU4v.EFu/xeKTTGg/
   - username: c.crutchfield.642
     name: Chris Crutchfield
     authorized_keys:
@@ -25,12 +7,6 @@ users:
     groups:
       - docker
     password: $6$w2DjXVZz4/c3NRAC$bIdyTZwZ.Zm26Fh3TSHITus2OhHRweHxGBYrfWe/jGDKIV4WwGbEoycKZKiHVZ53mqUwQRLoTyKK7vWkrpmw70
-    sudo_allow:
-      - /usr/bin/mount -t cifs *
-      - /usr/bin/mount -v -t cifs *
-      - /usr/bin/umount *
-      - /usr/bin/su fs_services
-      - /usr/bin/su sf_services
   - username: s.perry.543
     name: Sean Perry
     authorized_keys:
@@ -39,11 +15,3 @@ users:
     groups:
       - docker
     password: $6$rounds=656000$K2VO4J5uMFE3Eb6A$exJwg.2to2a.wP.X/8DSLKz1kJoe9hiP.SmjMg.TzFLPbxsmurhdYCbUYW.naPljdVgtAr9nlERdSR8GObOGb1
-  - username: a.chen.415
-    name: Annabelle Chen
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIH92Lhgn5ui/cjaJO9M3j8MKSEUCHRy50p6j9wiyPH annab@LAPTOP-6J92ST70
-    expires: "2025-08-29 23:59:59"
-    groups:
-      - docker
-    password: $6$rounds=656000$.ZTVvP2x8lycQPVC$0BQHGntMn1p893vtoNNXPPdPfi4VmaL23VImoit16iPae7Ay63ZN0IIae9QhYFnTmY.IpQMpCMkrSC41wiHoE.
