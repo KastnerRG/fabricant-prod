@@ -53,7 +53,7 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
       # - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # Use Let's Encrypt staging server for testing
       - "--providers.docker.network=traefik_proxy"
-      - "--metrics.otlp.http=:4318"
+      - "--metrics.prometheus=true"
     # user: "${USER_ID}:${GROUP_ID}"
     networks:
       traefik_proxy:
