@@ -87,7 +87,7 @@ services:
 
   authentik-proxy:
       image: *authentik-proxy-image
-      name: authentik-proxy
+      container_name: authentik-proxy
       environment:
           AUTHENTIK_HOST: http://authentik_server:9000
           AUTHENTIK_INSECURE: "true"

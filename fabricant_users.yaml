@@ -1,35 +1,4 @@
 users:
-  - username: n.hui.813
-    name: Nathan Hui
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIR1cXklusoEBrgQP4miHRvUp64rkrTUX2OrAJrE5f6H nthui@eng.ucsd.edu
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOe9vgZYP4LcuvT0n72kJF+0kiL0gbLYZEcqI/e4e4sI ntlhui@gmail.com
-    expires: "2025-09-30 23:59:59"
-    password: $6$rounds=656000$QQ9Dd6WpGC/63z1Z$8RCj3aJ1Lz/MYbjWEyCft9oBXr5mmnpuTc6hEmaAxRzq1FrHv.dlRme.5NVSSPrgDgL/3Hee.xHn3vkZTTJnv.
-    groups:
-      - docker
-    sudo_allow:
-      - /usr/bin/su fs_services
-      - /usr/bin/su sf_services
-      - /usr/bin/su - sf_services
-  - username: d.zuberi.160
-    name: Danial Zuberi
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6geLo8pS0dU9jOKdNkLY6pBrTGlaP+DvIdicxAVxZj dzuberi@kilogram
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBM09OFCP+hcvu6S/Ikl7LRj7qPsGjfreclJFRFF0lhu dzuberi@DESKTOP-BIFLG0S
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJpX5YWVEwpcmfQpPWpXks3AB27wYOTLuazguSzdJK7 dzuberi522@gmail
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8HSEwws1dhjpdIB/HgvBpHJYVotGwb0CzMqbIHhCMi dzube@DESKTOP-BIFLG0S
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+bBt46zXmHIbLwGC7WfoGHZQ9xIlSix5NKamgTUhhM dzuberi@Danials-MacBook-Pro.local
-    expires: "2025-06-30 23:59:59"
-    groups:
-      - docker
-    password: $6$rounds=656000$kNRNUzHcSXiWwX.d$cQ52OxxE30vj2mPo3jdnYPG7ROoYydsivKV2y9in3GGXGXDrek24bZMYQGSK0PT/7OioQDGg9vWYFdckvWj3y/
-  - username: o.weng.631
-    name: Olivia Weng
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM2dPvrqvFJQyPX1L1j7QFYCMFIFdYmJHolgtMhMdlx2 oweng@ucsd.edu
-    expires: "2025-06-30 23:59:59"
-    password: $6$rounds=656000$gIFhOQHZZLDrwQR.$5rFmouHYECQttLwtGx82jsx4Jls3cNWKtUfD4erNXInpfkUdaZ8ieZK4eif.rWDtNqKWaN6gMZOibM606csfn/
   - username: d.richmond.520
     name: Dustin Richmond
     authorized_keys:
