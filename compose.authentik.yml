@@ -32,7 +32,6 @@ services:
     restart: unless-stopped
     command: server
     environment:
-      AUTHENTIK_REDIS__HOST: redis_authentik
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik_db
@@ -54,15 +53,12 @@ services:
     depends_on:
       postgres_authentik:
         condition: service_healthy
-      redis_authentik:
-        condition: service_healthy
 
   authentik_worker:
     image: ghcr.io/goauthentik/server:2025.10 #tied to authentik server
     restart: unless-stopped
     command: worker
     environment:
-      AUTHENTIK_REDIS__HOST: redis_authentik
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik_db
@@ -84,8 +80,6 @@ services:
       - authentik
     depends_on:
       postgres_authentik:
-        condition: service_healthy
-      redis_authentik:
         condition: service_healthy
 
 secrets:
