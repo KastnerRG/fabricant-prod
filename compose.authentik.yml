@@ -89,6 +89,9 @@ services:
       image: *authentik-proxy-image
       container_name: authentik-proxy
       environment:
+          AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
+          AUTHENTIK_POSTGRESQL__USER: authentik
+          AUTHENTIK_POSTGRESQL__NAME: authentik_db
           AUTHENTIK_HOST: http://authentik_server:9000
           AUTHENTIK_INSECURE: "true"
           # Starting with 2021.9, you can optionally set this too
