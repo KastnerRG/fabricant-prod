@@ -111,6 +111,17 @@
     vars:
       installer: '{{ansible_env.HOME}}/installers/qualys_trellix/oec-qualystrellixinstallers-linux.tgz'
 
+# Disable SSH Password login
+  - name: Ensure PasswordAuthentication is set to no in sshd_config
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?PasswordAuthentication (yes|no)$'
+      line: 'PasswordAuthentication no'
+      state: present
+      notify:
+        - restart sshd
+
 # Web Services
   - import_tasks: web_services.yaml
   - name: Deny SSH login
