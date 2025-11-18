@@ -119,7 +119,7 @@
       regexp: '^#?PasswordAuthentication (yes|no)$'
       line: 'PasswordAuthentication no'
       state: present
-      notify:
+    notify:
         - restart sshd
 
 # Web Services
