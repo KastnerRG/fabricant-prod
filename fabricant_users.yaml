@@ -3,6 +3,7 @@ users:
     name: Chris Crutchfield
     authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF2Z7LbaDPTNkdnuvFivXTUx8X9gU0ZyWrrYBH7KSmG3 chris@chris-laptop
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUa2Pp0obMckcNrPolGG49uSzNt6vNGJUIO6B8BO7cV chris@vaultwarden
     expires: "2025-12-31 23:59:59"
     groups:
       - docker
