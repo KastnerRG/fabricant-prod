@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
     environment:
       - GF_SECURITY_ADMIN_USER=e4eadmin
+      - GF_SERVER_DOMAIN=dashboard.waiter.ucsd.edu
       - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_e4eadmin_password
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
     secrets:
