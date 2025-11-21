@@ -57,7 +57,7 @@ scrape_configs:
     static_configs:
       - targets:
         - localhost:9290
-        - fabricant.ucsd.edu:9290
+        - waiter.ucsd.edu:9290
   - job_name: 'blackbox_exporter'  # collect blackbox exporter's operational metrics.
     static_configs:
       - targets:
