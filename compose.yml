@@ -3,30 +3,6 @@ include:
   - compose.label-studio.yml
 
 services:
-  prometheus:
-    image: prom/prometheus:v3.6.0
-    container_name: prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    restart: unless-stopped
-    volumes:
-      - ./prometheus:/etc/prometheus:ro
-      - ./prometheus-data:/prometheus:rw
-    user: "${USER_ID}:${GROUP_ID}"
-    ports:
-      - 9090:9090
-  
-  alertmanager:
-    image: quay.io/prometheus/alertmanager:v0.28.1
-    container_name: alertmanager
-    command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
-    restart: unless-stopped
-    volumes:
-      - ./alertmanager:/etc/alertmanager:ro
-    ports:
-      - 9093:9093
-
   traefik:
     image: traefik:v3.6
     container_name: traefik
