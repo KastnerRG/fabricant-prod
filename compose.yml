@@ -74,6 +74,16 @@ services:
           - orchestrator.fishsense.e4e.ucsd.edu
           - data.smartfin.e4e.ucsd.edu
 
+  blackbox_exporter:
+    image: quay.io/prometheus/blackbox-exporter:v0.27.0
+    container_name: blackbox_exporter
+    volumes:
+      - ./blackbox-exporter:/config:ro
+    command: --config.file=/config/blackbox.yml
+    ports:
+      - 9115:9115
+    dns: 8.8.8.8
+
 
   # minio:
   #   image: quay.io/minio/minio
