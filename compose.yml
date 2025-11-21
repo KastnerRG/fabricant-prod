@@ -25,6 +25,9 @@ services:
     volumes:
       - ./grafana-storage:/var/lib/grafana:rw
       - ./grafana:/etc/grafana:ro
+    networks:
+      - traefik_proxy
+      - default
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`dashboard.waiter.ucsd.edu`)"
