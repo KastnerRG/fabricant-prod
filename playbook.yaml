@@ -121,6 +121,24 @@
       state: present
     notify:
         - restart sshd
+  - name: Ensure ChallengeResponseAuthentication is set to no in sshd_config
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?ChallengeResponseAuthentication (yes|no)$'
+      line: 'ChallengeResponseAuthentication no'
+      state: present
+    notify:
+        - restart sshd
+  - name: Ensure UsePAM is set to no in sshd_config
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?UsePAM (yes|no)$'
+      line: 'UsePAM no'
+      state: present
+    notify:
+        - restart sshd
 
 # Web Services
   - import_tasks: web_services.yaml
