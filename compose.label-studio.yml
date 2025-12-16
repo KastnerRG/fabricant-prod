@@ -2,7 +2,7 @@
   
 services:
   postgres_label_studio:
-    image: postgres:16.10
+    image: postgres:16.11
     container_name: postgres_label_studio
     restart: always
     shm_size: 128 mb

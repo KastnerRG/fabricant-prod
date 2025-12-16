@@ -4,7 +4,7 @@ include:
 
 services:
   prometheus:
-    image: prom/prometheus:v3.6.0
+    image: prom/prometheus:v3.8.1
     container_name: prometheus
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.retention.time=2y --storage.tsdb.retention.size=700GB --storage.tsdb.wal-compression
     restart: unless-stopped
@@ -13,7 +13,7 @@ services:
       - ./prometheus-data:/prometheus:rw
 
   grafana:
-    image: grafana/grafana-enterprise:12.2.0
+    image: grafana/grafana-enterprise:12.3
     container_name: grafana
     user: '1000'
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   blackbox_exporter:
-    image: quay.io/prometheus/blackbox-exporter:v0.27.0
+    image: quay.io/prometheus/blackbox-exporter:v0.28.0
     container_name: blackbox_exporter
     volumes:
       - ./blackbox-exporter:/config:ro
