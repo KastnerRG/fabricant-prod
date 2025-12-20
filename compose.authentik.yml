@@ -65,6 +65,11 @@ services:
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik_db
+      AUTHENTIK_EMAIL__HOST: smtp-relay.gmail.com
+      AUTHENTIK_EMAIL__PORT: 587
+      AUTHENTIK_EMAIL__USE_TLS: true
+      AUTHENTIK_EMAIL__USE_SSL: false
+      AUTHENTIK_EMAIL__TIMEOUT: 30
     # `user: root` and the docker socket volume are optional.
     # See more for the docker socket integration here:
     # https://goauthentik.io/docs/outposts/integrations/docker
