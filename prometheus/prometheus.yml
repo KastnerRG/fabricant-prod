@@ -129,3 +129,8 @@ scrape_configs:
     static_configs:
       - targets:
         - fabricant-prod.ucsd.edu:8080
+  - job_name: 'temporal'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
+        - fishsense-temporal:8000
