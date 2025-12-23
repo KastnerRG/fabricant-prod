@@ -78,6 +78,12 @@ scrape_configs:
         - https://dashboard.e4e.ucsd.edu/login
         - https://vault.e4e-gateway.ucsd.edu/
         - https://etap.nsf.gov/award/2378/opportunity/10235
+        # FishSense
+        - https://fishsense.e4e.ucsd.edu/
+        - https://analytics.fishsense.e4e.ucsd.edu/login/
+        - https://orchestrator.fishsense.e4e.ucsd.edu # FishSense API
+        - https://orchestrator.fishsense.e4e.ucsd.edu/api/v1/data/ping # Nginx Data API
+        - https://workflows.fishsense.e4e.ucsd.edu/login
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
