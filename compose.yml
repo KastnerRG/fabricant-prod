@@ -63,7 +63,7 @@ services:
   #     caddy_0.reverse_proxy: "{{upstreams 9000}}"
   #     caddy_1: mc.fabricant.ucsd.edu
   #     caddy_1.reverse_proxy: "{{upstreams 9001}}"
-secrets:
+# secrets:
   # minio_admin_password:
   #   file: .secrets/minio_admin_password.txt
 networks:
