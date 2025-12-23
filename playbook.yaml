@@ -200,6 +200,11 @@
       cmd: '{{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/bin/node {{ansible_env.HOME}}/.nvm/versions/node/v24.3.0/lib/node_modules/@bitwarden/cli/build/bw.js --session `cat .bw_session` get password "mc.fabricant.ucsd.edu admin" > {{ansible_env.HOME}}/fabricant-prod/.secrets/minio_admin_password.txt'
       chdir: '{{ansible_env.HOME}}/fabricant-prod'
       creates: '{{ansible_env.HOME}}/fabricant-prod/.secrets/minio_admin_password.txt'
+  - name: Create docker network prometheus_network
+    become: true
+    community.docker.docker_network:
+      name: prometheus_network
+      state: present
   - name: Create docker network traefik_proxy
     become: true
     community.docker.docker_network:
