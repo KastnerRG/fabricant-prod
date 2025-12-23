@@ -73,9 +73,8 @@ scrape_configs:
         - https://e4e.ucsd.edu/
         - https://kastner.ucsd.edu/
         - https://e4e-nas.ucsd.edu:6021/
-        - https://e4e-octopi.dynamic.ucsd.edu/login/
         - https://labeler.e4e.ucsd.edu/version
-        - https://dashboard.e4e.ucsd.edu/login
+        # - https://dashboard.e4e.ucsd.edu/login
         - https://vault.e4e-gateway.ucsd.edu/
         - https://etap.nsf.gov/award/2378/opportunity/10235
         # FishSense
@@ -114,16 +113,16 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: blackbox_exporter:9115  # The blackbox exporter's real hostname:port.    
-  - job_name: e4efs_spider
-    scrape_interval: 15s
-    static_configs:
-      - targets:
-        - fabricant-prod.ucsd.edu:9095
-  - job_name: e4efs_workers
-    scrape_interval: 15s
-    static_configs:
-      - targets:
-        - kastner-ml.ucsd.edu:9090
+  # - job_name: e4efs_spider
+  #   scrape_interval: 15s
+  #   static_configs:
+  #     - targets:
+  #       - fabricant-prod.ucsd.edu:9095
+  # - job_name: e4efs_workers
+  #   scrape_interval: 15s
+  #   static_configs:
+  #     - targets:
+  #       - kastner-ml.ucsd.edu:9090
   - job_name: 'octoprint'
     scrape_interval: 5s
     metrics_path: '/plugin/prometheus_exporter/metrics'
