@@ -116,29 +116,29 @@
     become: true
     ansible.builtin.lineinfile:
       path: /etc/ssh/sshd_config
-      regexp: '^#?PasswordAuthentication (yes|no)$'
+      regexp: '^#?\s*PasswordAuthentication\s+'
       line: 'PasswordAuthentication no'
       state: present
     notify:
-        - restart sshd
+        - restart ssh
   - name: Ensure ChallengeResponseAuthentication is set to no in sshd_config
     become: true
     ansible.builtin.lineinfile:
       path: /etc/ssh/sshd_config
-      regexp: '^#?ChallengeResponseAuthentication (yes|no)$'
+      regexp: '^#?\s*ChallengeResponseAuthentication\s+'
       line: 'ChallengeResponseAuthentication no'
       state: present
     notify:
-        - restart sshd
+        - restart ssh
   - name: Ensure UsePAM is set to no in sshd_config
     become: true
     ansible.builtin.lineinfile:
       path: /etc/ssh/sshd_config
-      regexp: '^#?UsePAM (yes|no)$'
+      regexp: '^#?\s*UsePAM\s+'
       line: 'UsePAM no'
       state: present
     notify:
-        - restart sshd
+        - restart ssh
 
 # Web Services
   - import_tasks: web_services.yaml
@@ -150,7 +150,7 @@
       regexp: "^(#)?DenyGroups"
       state: present
     notify:
-      - restart sshd
+      - restart ssh
 # Create users:
   - import_tasks: create_users.yaml
 
@@ -224,8 +224,8 @@
     service:
       name: docker
       state: restarted
-  - name: restart sshd
+  - name: restart ssh
     become: true
     service:
-      name: sshd
-      state: reloaded
+      name: ssh
+      state: restarted
