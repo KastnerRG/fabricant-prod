@@ -70,4 +70,4 @@
 - name: Install the Loki Docker logging driver plugin
   community.docker.docker_plugin:
     plugin_name: grafana/loki-docker-driver:3.3.2-amd64
-    state: enabled
+    state: enable
