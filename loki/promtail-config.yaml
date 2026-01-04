@@ -16,3 +16,10 @@ scrape_configs:
     labels:
       job: varlogs
       __path__: /var/log/*log
+- job_name: ansible_deploy_logs
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: ansible_deploy
+      __path__: /tmp/ansible_deploy.log
