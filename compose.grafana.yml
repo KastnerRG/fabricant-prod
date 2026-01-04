@@ -22,6 +22,26 @@ services:
       - "traefik.http.routers.grafana.tls.certresolver=letsencrypt"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
+  loki:
+    image: grafana/loki:3.6
+    user: '1000'
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
+    networks:
+      - default
+      - loki_network
+
+  promtail:
+    image: grafana/promtail:3.6
+    user: '1000'
+    volumes:
+      - /var/log:/var/log:ro
+      - ./promtail/config.yml:/etc/promtail/config.yml:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - loki_network
+
   prometheus:
     image: prom/prometheus:v3.8.1
     container_name: prometheus
@@ -47,5 +67,6 @@ secrets:
   grafana_e4eadmin_password:
     file: .secrets/gf_admin_password.txt
 networks:
+  loki_network:
   prometheus_network:
     external: true
