@@ -28,6 +28,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki/loki-config.yaml:/etc/loki/local-config.yaml:ro
+    restart: unless-stopped
     networks:
       - default
       - loki_network
@@ -40,6 +41,7 @@ services:
       - ./ansible.log:/tmp/ansible_deploy.log:ro
       - ./loki/promtail-config.yaml:/etc/promtail/config.yml:ro
     command: -config.file=/etc/promtail/config.yml
+    restart: unless-stopped
     networks:
       - loki_network
 
@@ -64,6 +66,7 @@ services:
     ports:
       - 9115:9115
     dns: 8.8.8.8
+    restart: unless-stopped
 secrets:
   grafana_e4eadmin_password:
     file: .secrets/gf_admin_password.txt
