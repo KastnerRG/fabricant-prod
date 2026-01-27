@@ -16,3 +16,19 @@ users:
     groups:
       - docker
     password: $6$rounds=656000$K2VO4J5uMFE3Eb6A$exJwg.2to2a.wP.X/8DSLKz1kJoe9hiP.SmjMg.TzFLPbxsmurhdYCbUYW.naPljdVgtAr9nlERdSR8GObOGb1
+  - username: o.qazi.317
+    name: Omair Qazi
+    authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO06aFfaw6b3yAYd2IJeOJeQxp2U9XENGlPg3+k7reAE omqazi@ucsd.edu
+    expires: "2026-06-30 23:59:59"
+    password: $6$rounds=656000$PgygpzhPaf70iu02$ggBxnCMHa/20XsoAPlhIHFGezsPvbFpBdRTy11A2NMHRNZDXrkbXcLYf4hBMHx4yHnEbVTr4iG0GsYDWorTR7.
+    sudo_allow:
+      - sudo su - fs_services
+  - username: n.jian.433
+    name: Neal Jian
+    authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIILAoGpLaTBGIFVMnecj2+UWxBQj1hCXEHFgRShXb8py nealjian@outlook.com
+    expires: "2026-06-30 23:59:59"
+    password: $6$rounds=656000$iiitaZ02jzt6FM.4$s5sC9DnMpoxN3hZ0GM9BhCOUHWxNmUtQx/Y6t0J.nFWe8jGXNO8hKgwAJg3qJnEnATmJ03ttybJa3R0GM3IXI1
+    sudo_allow:
+      - sudo su - fs_services
