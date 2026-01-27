@@ -23,7 +23,7 @@ users:
     expires: "2026-06-30 23:59:59"
     password: $6$rounds=656000$PgygpzhPaf70iu02$ggBxnCMHa/20XsoAPlhIHFGezsPvbFpBdRTy11A2NMHRNZDXrkbXcLYf4hBMHx4yHnEbVTr4iG0GsYDWorTR7.
     sudo_allow:
-      - sudo su - fs_services
+      - /usr/bin/su - fs_services
   - username: n.jian.433
     name: Neal Jian
     authorized_keys:
@@ -31,4 +31,4 @@ users:
     expires: "2026-06-30 23:59:59"
     password: $6$rounds=656000$iiitaZ02jzt6FM.4$s5sC9DnMpoxN3hZ0GM9BhCOUHWxNmUtQx/Y6t0J.nFWe8jGXNO8hKgwAJg3qJnEnATmJ03ttybJa3R0GM3IXI1
     sudo_allow:
-      - sudo su - fs_services
+      - /usr/bin/su - fs_services
