@@ -2,6 +2,7 @@ include:
   - compose.authentik.yml
   - compose.grafana.yml
   - compose.label-studio.yml
+  - compose.otter.yml
 
 services:
   traefik:
