@@ -11,5 +11,5 @@ services:
       - "traefik.http.routers.otterwiki.rule=Host(`wiki.fabricant.ucsd.edu`)"
       - "traefik.http.routers.otterwiki.entrypoints=websecure"
       - "traefik.http.routers.otterwiki.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.otterwiki.middlewares=authentik@docker"
+      # - "traefik.http.routers.otterwiki.middlewares=authentik@docker"
       - "traefik.http.services.otterwiki.loadbalancer.server.port=80"
