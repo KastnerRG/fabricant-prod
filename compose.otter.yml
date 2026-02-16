@@ -4,6 +4,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./otterwiki/app-data:/app-data
+    networks:
+      - traefik_proxy
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.otterwiki.rule=Host(`wiki.fabricant.ucsd.edu`)"
