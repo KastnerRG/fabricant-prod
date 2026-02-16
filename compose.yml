@@ -18,7 +18,7 @@ services:
       - ./traefik-data/letsencrypt:/letsencrypt:z
     command:
       - "--log.level=DEBUG"
-      # - "--api.insecure=true"
+      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
@@ -43,6 +43,7 @@ services:
           - labeler.e4e.ucsd.edu
           - orchestrator.fishsense.e4e.ucsd.edu
           - data.smartfin.e4e.ucsd.edu
+          - wiki.fabricant.ucsd.edu
 
 
   # minio:
