@@ -35,6 +35,7 @@ services:
       - "--metrics.prometheus=true"
     # user: "${USER_ID}:${GROUP_ID}"
     networks:
+      authentik:
       traefik_proxy:
         aliases:
           - s3.fabricant.ucsd.edu
@@ -70,5 +71,7 @@ services:
   #   file: .secrets/minio_admin_password.txt
 networks:
   traefik_proxy:
+    external: true
+  authentik:
     external: true
 
