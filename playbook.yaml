@@ -210,6 +210,11 @@
     community.docker.docker_network:
       name: traefik_proxy
       state: present
+  - name: Create docker network authentik
+    become: true
+    community.docker.docker_network:
+      name: authentik
+      state: present
   - name: Docker compose
     community.docker.docker_compose_v2:
       project_src: '{{ansible_env.HOME}}/fabricant-prod/'
