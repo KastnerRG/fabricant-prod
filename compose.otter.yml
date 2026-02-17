@@ -5,7 +5,7 @@ services:
     volumes:
       - ./otterwiki/app-data:/app-data
     environment:
-      - AUTH_METHOD='PROXY_HEADER'
+      - AUTH_METHOD=PROXY_HEADER
     networks:
       - traefik_proxy
     labels:
