@@ -1,5 +1,5 @@
-x-authentik-image: &authentik-image ghcr.io/goauthentik/server:2025.10
-x-authentik-proxy-image: &authentik-proxy-image ghcr.io/goauthentik/proxy:2025.10
+x-authentik-image: &authentik-image ghcr.io/goauthentik/server:2025.12
+x-authentik-proxy-image: &authentik-proxy-image ghcr.io/goauthentik/proxy:2025.12
 
 services:
   postgres_authentik:
