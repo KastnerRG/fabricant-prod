@@ -112,7 +112,7 @@ services:
       - "traefik.enable=true"
 
       # Route callback/auth endpoints to the outpost (MUST win)
-      - "traefik.http.routers.ak_outpost.rule=HostRegexp(`{host:[a-z0-9.-]+}.ucsd.edu`) && PathPrefix(`/outpost.goauthentik.io/`)"
+      - "traefik.http.routers.ak_outpost.rule=HostRegexp(`{host:.+}\\.ucsd\\.edu`) && PathPrefix(`/outpost.goauthentik.io/`)"
       - "traefik.http.routers.ak_outpost.entrypoints=websecure"
       - "traefik.http.routers.ak_outpost.tls=true"
       - "traefik.http.routers.ak_outpost.priority=10000000"
