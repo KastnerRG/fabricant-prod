@@ -215,6 +215,13 @@
     community.docker.docker_network:
       name: authentik
       state: present
+  - name: Deploy wikijs password
+    ansible.builtin.script:
+      cmd: scripts/deploy_wikijs_pass.sh
+      creates: "{{ansible_env.HOME}}/fabricant-prod/.secrets/wikijs_db_password.env"
+      executable: /bin/bash
+      chdir: "{{ansible_env.HOME}}/fabricant-prod"
+
   - name: Docker compose
     community.docker.docker_compose_v2:
       project_src: '{{ansible_env.HOME}}/fabricant-prod/'

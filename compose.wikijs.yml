@@ -1,0 +1,30 @@
+services:
+  wiki_db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_USER: wikijs
+    env_file:
+      - .secrets/wikijs_db_password.env
+    restart: unless-stopped
+    volumes:
+      - ./wikijs/db-data:/var/lib/postgresql/data
+
+  wiki:
+    image: ghcr.io/requarks/wiki:2
+    depends_on:
+      - wiki_db
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: wiki_db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_NAME: wiki
+    env_file:
+      - .secrets/wikijs_db_password.env
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wikijs.rule=Host(`wiki.fabricant.ucsd.edu`)"
+      - "traefik.http.routers.wikijs.entrypoints=websecure"
+      - "traefik.http.routers.wikijs.tls.certresolver=letsencrypt"
