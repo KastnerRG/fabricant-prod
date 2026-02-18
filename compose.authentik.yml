@@ -116,8 +116,8 @@ services:
       - "traefik.http.routers.ak_outpost.entrypoints=websecure"
       - "traefik.http.routers.ak_outpost.tls=true"
       - "traefik.http.routers.ak_outpost.priority=10000000"
-      - "traefik.http.routers.ak_outpost.service=ak_outpost_svc"
-      - "traefik.http.services.ak_outpost_svc.loadbalancer.server.port=9000"
+      - "traefik.http.routers.ak_outpost.service=ak_traefik_proxy"
+      - "traefik.http.services.ak_traefik_proxy.loadbalancer.server.port=9000"
 
       # ForwardAuth middleware (used by your protected routers)
       - "traefik.http.middlewares.authentik.forwardauth.address=http://authentik_proxy:9000/outpost.goauthentik.io/auth/traefik"
