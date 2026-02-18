@@ -1,6 +1,7 @@
 services:
   wiki_db:
     image: postgres:15-alpine
+    container_name: wiki_db
     environment:
       POSTGRES_DB: wiki
       POSTGRES_USER: wikijs
@@ -23,6 +24,9 @@ services:
     env_file:
       - .secrets/wikijs_db_password.env
     restart: unless-stopped
+    networks:
+      - traefik_proxy
+      - default
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wikijs.rule=Host(`wiki.fabricant.ucsd.edu`)"
