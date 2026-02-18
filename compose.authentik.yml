@@ -99,9 +99,9 @@ services:
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik_db
-      AUTHENTIK_HOST: http://authentik_server:9000
+      AUTHENTIK_HOST: https://auth.fabricant.ucsd.edu
       AUTHENTIK_HOST_BROWSER: https://auth.fabricant.ucsd.edu
-      # AUTHENTIK_INSECURE: "false"
+      AUTHENTIK_INSECURE: "false"
       # Starting with 2021.9, you can optionally set this too
       # when authentik_host for internal communication doesn't match the public URL
       # AUTHENTIK_HOST_BROWSER: https://auth.fabricant.ucsd.edu

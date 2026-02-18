@@ -18,7 +18,7 @@ services:
       - ./traefik-data/letsencrypt:/letsencrypt:z
     command:
       - "--log.level=DEBUG"
-      - "--api.insecure=true"
+      # - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
