@@ -95,6 +95,7 @@ services:
     image: *authentik-proxy-image
     container_name: authentik_proxy
     environment:
+      AUTHENTIK_LOG_LEVEL: trace
       TMPDIR: /data/tmp
       AUTHENTIK_POSTGRESQL__HOST: postgres_authentik
       AUTHENTIK_POSTGRESQL__USER: authentik
