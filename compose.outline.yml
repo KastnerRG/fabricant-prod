@@ -14,6 +14,7 @@ services:
       - "traefik.http.routers.outline.rule=Host(`wiki.fabricant.ucsd.edu`)"
       - "traefik.http.routers.outline.entrypoints=websecure"
       - "traefik.http.routers.outline.tls.certresolver=letsencrypt"
+    user: "${USER_ID}:${GROUP_ID}"
     networks:
       - outline
       - traefik_proxy
