@@ -23,8 +23,6 @@ services:
     env_file:
       - ./outline/docker.env
       - ./.secrets/outline_secrets.env
-    volumes:
-      - ./outline/redis/redis.conf:/redis.conf
     command: ["redis-server", "/redis.conf"]
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
