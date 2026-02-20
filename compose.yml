@@ -2,7 +2,6 @@ include:
   - compose.authentik.yml
   - compose.grafana.yml
   - compose.label-studio.yml
-  - compose.wikijs.yml
 
 services:
   traefik:
