@@ -3,7 +3,7 @@ services:
     image: docker.getoutline.com/outlinewiki/outline:latest
     env_file:
       - ./outline/docker.env
-      - ./secrets/outline_secrets.env
+      - ./.secrets/outline_secrets.env
     volumes:
       - ./outline/outline_data:/var/lib/outline/data
     depends_on:
@@ -19,7 +19,7 @@ services:
     image: redis:8
     env_file:
       - ./outline/docker.env
-      - ./secrets/outline_secrets.env
+      - ./.secrets/outline_secrets.env
     volumes:
       - ./outline/redis/redis.conf:/redis.conf
     command: ["redis-server", "/redis.conf"]
@@ -33,7 +33,7 @@ services:
     image: postgres:18
     env_file:
       - ./outline/docker.env
-      - ./secrets/outline_secrets.env
+      - ./.secrets/outline_secrets.env
     volumes:
       - ./outline/postgres:/var/lib/postgresql
     healthcheck:
