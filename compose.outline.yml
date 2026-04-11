@@ -52,3 +52,6 @@ services:
 
 networks:
   outline:
+    ipam:
+      config:
+        - subnet: 172.24.0.0/16

@@ -71,6 +71,10 @@ services:
   # minio_admin_password:
   #   file: .secrets/minio_admin_password.txt
 networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16
   traefik_proxy:
     external: true
   authentik:
