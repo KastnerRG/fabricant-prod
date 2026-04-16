@@ -1,0 +1,20 @@
+name: Deploy to Fabricant-Host
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+
+    runs-on: self-hosted
+
+    steps:
+      - name: Run Ansible Playbook
+        run: |
+          pushd {{ansible_env.HOME}}/fabricant-prod
+          git pull origin main
+          git submodule update --init --recursive
+          source {{ansible_env.HOME}}/fabricant-prod/.venv/bin/activate
+          ansible-playbook playbook.yaml
+          popd
