@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Run Ansible Playbook
         run: |
-          pushd {{ansible_env.HOME}}/fabricant-prod
+          pushd /home/fabricant-admin/fabricant-prod
           git pull origin main
           git submodule update --init --recursive
-          source {{ansible_env.HOME}}/fabricant-prod/.venv/bin/activate
+          source /home/fabricant-admin/fabricant-prod/.venv/bin/activate
           ansible-playbook playbook.yaml
           popd
