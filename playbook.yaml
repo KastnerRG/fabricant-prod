@@ -107,38 +107,13 @@
 #   - import_tasks: ufw.yml
 
 # Qualys/Trellix
-  - import_tasks: oec_qualys_trellix.yaml
+  - import_tasks: ansible-components/security_tools/oec_qualys_trellix.yaml
     vars:
       installer: '{{ansible_env.HOME}}/installers/qualys_trellix/oec-qualystrellixinstallers-linux.tgz'
 
 # Disable SSH Password login
-  - name: Ensure PasswordAuthentication is set to no in sshd_config
-    become: true
-    ansible.builtin.lineinfile:
-      path: /etc/ssh/sshd_config
-      regexp: '^#?\s*PasswordAuthentication\s+'
-      line: 'PasswordAuthentication no'
-      state: present
-    notify:
-        - restart ssh
-  - name: Ensure ChallengeResponseAuthentication is set to no in sshd_config
-    become: true
-    ansible.builtin.lineinfile:
-      path: /etc/ssh/sshd_config
-      regexp: '^#?\s*ChallengeResponseAuthentication\s+'
-      line: 'ChallengeResponseAuthentication no'
-      state: present
-    notify:
-        - restart ssh
-  - name: Ensure UsePAM is set to no in sshd_config
-    become: true
-    ansible.builtin.lineinfile:
-      path: /etc/ssh/sshd_config
-      regexp: '^#?\s*UsePAM\s+'
-      line: 'UsePAM no'
-      state: present
-    notify:
-        - restart ssh
+  - name: Disable SSH password authentication
+    import_tasks: ansible-components/sshd_config.yml
 
 # Web Services
   - import_tasks: web_services.yaml

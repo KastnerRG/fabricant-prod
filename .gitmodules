@@ -1,0 +1,3 @@
+[submodule "ansible-components"]
+	path = ansible-components
+	url = https://github.com/KastnerRG/ansible-components.git
