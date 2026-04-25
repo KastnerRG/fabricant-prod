@@ -20,7 +20,7 @@ services:
   mlflow:
     build: ./mlflow/config
     restart: unless-stopped
-    env_file: ./mlflow/.env
+    # env_file: ./mlflow/.env
     environment:
       MLFLOW_BACKEND_STORE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@postgres:5432/mlflow
       MLFLOW_AUTH_DATABASE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@postgres:5432/mlflow_auth
