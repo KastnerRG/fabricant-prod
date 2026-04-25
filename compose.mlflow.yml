@@ -18,7 +18,7 @@ services:
       - mlflow_internal
 
   mlflow:
-    build: ./mlflow
+    build: ./mlflow/config
     restart: unless-stopped
     env_file: ./mlflow/.env
     environment:
