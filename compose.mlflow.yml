@@ -1,5 +1,5 @@
 services:
-  postgres:
+  mlflow_postgres:
     image: postgres:16
     restart: unless-stopped
     environment:
@@ -20,15 +20,14 @@ services:
   mlflow:
     build: ./mlflow/config
     restart: unless-stopped
-    # env_file: ./mlflow/.env
     environment:
-      MLFLOW_BACKEND_STORE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@postgres:5432/mlflow
-      MLFLOW_AUTH_DATABASE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@postgres:5432/mlflow_auth
+      MLFLOW_BACKEND_STORE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow
+      MLFLOW_AUTH_DATABASE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow_auth
       MLFLOW_ARTIFACTS_DESTINATION: /mlflow/artifacts
     volumes:
       - mlflow_artifacts:/mlflow/artifacts
     depends_on:
-      postgres:
+      mlflow_postgres:
         condition: service_healthy
     networks:
       - mlflow_internal
