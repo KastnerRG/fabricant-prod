@@ -1,0 +1,2 @@
+CREATE DATABASE mlflow_auth;
+GRANT ALL PRIVILEGES ON DATABASE mlflow_auth TO mlflow;

@@ -3,6 +3,7 @@ include:
   - compose.grafana.yml
   - compose.label-studio.yml
   - compose.outline.yml
+  - compose.mlflow.yml
 
 services:
   traefik:
@@ -48,6 +49,7 @@ services:
           - wiki.fabricant.ucsd.edu
           - roster.e4e.ucsd.edu
           - github-sync.e4e.ucsd.edu
+          - mlflow.krg.ucsd.edu
 
 
   # minio:
