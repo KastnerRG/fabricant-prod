@@ -24,6 +24,14 @@ services:
       MLFLOW_BACKEND_STORE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow
       MLFLOW_AUTH_DATABASE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow_auth
       MLFLOW_ARTIFACTS_DESTINATION: /mlflow/artifacts
+      OIDC_DISCOVERY_URL: ${OIDC_DISCOVERY_URL}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      SECRET_KEY: ${SECRET_KEY}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI}
+      OIDC_GROUP_NAME: ${OIDC_GROUP_NAME}
+      OIDC_ADMIN_GROUP_NAME: ${OIDC_ADMIN_GROUP_NAME}
+      OIDC_SCOPE: ${OIDC_SCOPE}
     volumes:
       - mlflow_artifacts:/mlflow/artifacts
     depends_on:
