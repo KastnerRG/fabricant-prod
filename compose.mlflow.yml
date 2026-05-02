@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     environment:
       MLFLOW_BACKEND_STORE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow
-      MLFLOW_AUTH_DATABASE_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow_auth
+      OIDC_USERS_DB_URI: postgresql://${POSTGRES_USER:-mlflow}:${POSTGRES_PASSWORD}@mlflow_postgres:5432/mlflow_auth
       MLFLOW_ARTIFACTS_DESTINATION: /mlflow/artifacts
       MLFLOW_SERVER_ALLOWED_HOSTS: "mlflow.krg.ucsd.edu"
       OIDC_DISCOVERY_URL: ${OIDC_DISCOVERY_URL}
