@@ -48,8 +48,12 @@ services:
       - "traefik.http.routers.mlflow.tls.certresolver=letsencrypt"
       - "traefik.http.routers.mlflow.middlewares=mlflow-cors-headers"
       - "traefik.http.services.mlflow.loadbalancer.server.port=5000"
-      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST"
-      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolalloworiginlist=*"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,PATCH,DELETE"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolalloworiginlist=https://mlflow.krg.ucsd.edu"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolallowheaders=Content-Type,Authorization,X-Requested-With,X-Mlflow-Workspace,X-Mlflow-Experiment-Id"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolallowcredentials=true"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolmaxage=3600"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.addvaryheader=true"
 
 volumes:
   postgres_data:
