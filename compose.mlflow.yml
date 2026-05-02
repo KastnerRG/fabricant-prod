@@ -46,7 +46,10 @@ services:
       - "traefik.http.routers.mlflow.rule=Host(`mlflow.krg.ucsd.edu`)"
       - "traefik.http.routers.mlflow.entrypoints=websecure"
       - "traefik.http.routers.mlflow.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.mlflow.middlewares=mlflow-cors-headers"
       - "traefik.http.services.mlflow.loadbalancer.server.port=5000"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST"
+      - "traefik.http.middlewares.mlflow-cors-headers.headers.accesscontrolalloworiginlist=*"
 
 volumes:
   postgres_data:
