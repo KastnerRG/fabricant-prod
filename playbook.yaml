@@ -86,6 +86,7 @@
         - acl
         - qemu-guest-agent
         - nfs-common
+        - haveged # Needed for Entropy on VMs
   - name: Ensure these packages are not installed
     become: true
     ansible.builtin.apt:
